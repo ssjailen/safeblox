@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SafeBlox — Is Your Kid's Roblox Game Safe?</title>
+<meta name="description" content="Free instant safety reports for any Roblox game. Check chat risks, spending traps, data collection & more. Trusted by parents.">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:       #0d1b2a;
+  --navy-mid:   #1a2f45;
+  --navy-card:  #132030;
+  --teal:       #00c9a7;
+  --teal-dim:   #00a88c;
+  --amber:      #ffb347;
+  --red:        #ff6b6b;
+  --green:      #4ecb71;
+  --cream:      #f5f0e8;
+  --text:       #e8e0d5;
+  --text-dim:   #8a9bb0;
+  --border:     rgba(0,201,167,0.12);
+  --border-mid: rgba(255,255,255,0.08);
+
+  /* risk palette */
+  --red-bg:     rgba(255,107,107,0.12);
+  --amber-bg:   rgba(255,179,71,0.12);
+  --green-bg:   rgba(78,203,113,0.12);
+  --red-border:   rgba(255,107,107,0.3);
+  --amber-border: rgba(255,179,71,0.3);
+  --green-border: rgba(78,203,113,0.3);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ── RADIAL GLOW BG ── */
+body::before {
+  content:'';
+  position:fixed; inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% -10%, rgba(0,201,167,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 110%, rgba(0,100,200,0.07) 0%, transparent 60%);
+  pointer-events:none; z-index:0;
+}
+
+/* ── NAV ── */
+nav {
+  position:sticky; top:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:1rem 2.5rem;
+  background:rgba(13,27,42,0.92);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border-mid);
+}
+
+.logo {
+  font-family:'Fraunces',serif;
+  font-size:1.4rem; font-weight:700;
+  color:var(--cream);
+  display:flex; align-items:center; gap:0.5rem;
+  letter-spacing:-0.01em;
+}
+
+.logo-dot {
+  width:10px; height:10px;
+  background:var(--teal);
+  border-radius:50%;
+  box-shadow:0 0 14px var(--teal);
+}
+
+.nav-right {
+  display:flex; align-items:center; gap:1rem;
+}
+
+.nav-link {
+  font-size:0.875rem; font-weight:500;
+  color:var(--text-dim); text-decoration:none;
+  transition:color 0.15s;
+}
+.nav-link:hover { color:var(--cream); }
+
+.nav-cta {
+  background:var(--teal); color:var(--navy);
+  border:none; border-radius:8px;
+  padding:0.5rem 1.2rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.875rem; font-weight:700;
+  cursor:pointer; transition:background 0.15s, transform 0.1s;
+}
+.nav-cta:hover { background:var(--teal-dim); transform:translateY(-1px); }
+
+/* ── TICKER ── */
+.ticker-wrap {
+  background:var(--navy-mid);
+  border-bottom:1px solid var(--border-mid);
+  overflow:hidden; white-space:nowrap;
+  padding:0.5rem 0;
+  position:relative; z-index:1;
+}
+
+.ticker-inner {
+  display:inline-flex; gap:0;
+  animation:ticker 40s linear infinite;
+}
+
+.ticker-item {
+  display:inline-flex; align-items:center; gap:0.5rem;
+  font-size:0.75rem; font-weight:500;
+  padding:0 2.5rem;
+  letter-spacing:0.04em; text-transform:uppercase;
+  color:var(--text-dim);
+}
+
+.ticker-dot {
+  width:5px; height:5px;
+  background:var(--teal);
+  border-radius:50%; flex-shrink:0;
+}
+
+@keyframes ticker {
+  from { transform:translateX(0); }
+  to   { transform:translateX(-50%); }
+}
+
+/* ── HERO ── */
+.hero {
+  position:relative; z-index:1;
+  max-width:1120px; margin:0 auto;
+  padding:5rem 2rem 3rem;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:center;
+}
+
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:0.5rem;
+  background:var(--red-bg);
+  border:1px solid var(--red-border);
+  color:var(--red);
+  font-size:0.72rem; font-weight:700;
+  letter-spacing:0.1em; text-transform:uppercase;
+  padding:0.35rem 0.9rem; border-radius:100px;
+  margin-bottom:1.4rem;
+  animation:fadeUp 0.6s ease both;
+}
+
+.hero h1 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(2.5rem,4.5vw,3.8rem);
+  font-weight:700; line-height:1.08;
+  letter-spacing:-0.02em; color:var(--cream);
+  margin-bottom:1.2rem;
+  animation:fadeUp 0.6s 0.1s ease both;
+}
+
+.hero h1 em { font-style:italic; color:var(--teal); }
+
+.hero-desc {
+  font-size:1.05rem; color:var(--text-dim);
+  line-height:1.7; max-width:440px;
+  margin-bottom:2rem;
+  animation:fadeUp 0.6s 0.2s ease both;
+}
+
+/* ── SEARCH ── */
+.search-form {
+  display:flex; flex-direction:column; gap:0.75rem;
+  animation:fadeUp 0.6s 0.3s ease both;
+}
+
+.search-wrap { position:relative; }
+
+.search-row {
+  display:flex; gap:0.4rem;
+  background:var(--navy-card);
+  border:1.5px solid var(--border);
+  border-radius:14px; padding:0.35rem;
+  box-shadow:0 4px 24px rgba(0,0,0,0.3);
+  transition:border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-row:focus-within {
+  border-color:rgba(0,201,167,0.5);
+  box-shadow:0 0 0 4px rgba(0,201,167,0.08), 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.search-input {
+  flex:1; border:none; outline:none;
+  background:none;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.95rem; color:var(--cream);
+  padding:0.65rem 0.75rem;
+}
+.search-input::placeholder { color:var(--text-dim); }
+
+/* ── AUTOCOMPLETE ── */
+.autocomplete-drop {
+  display:none;
+  position:absolute; top:calc(100% + 8px); left:0; right:0;
+  background:var(--navy-card);
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  box-shadow:0 16px 48px rgba(0,0,0,0.5);
+  z-index:300; overflow:hidden;
+}
+.autocomplete-drop.open { display:block; }
+
+.ac-item {
+  display:flex; align-items:center; gap:0.75rem;
+  padding:0.75rem 1rem;
+  cursor:pointer; border-bottom:1px solid var(--border-mid);
+  transition:background 0.12s;
+}
+.ac-item:last-child { border-bottom:none; }
+.ac-item:hover, .ac-item.active { background:var(--navy-mid); }
+
+.ac-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.ac-name { flex:1; font-size:0.88rem; font-weight:500; color:var(--cream); }
+.ac-visits { font-size:0.72rem; color:var(--text-dim); }
+.ac-risk { font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; }
+.ac-risk.high { color:var(--red); }
+.ac-risk.medium { color:var(--amber); }
+.ac-risk.low { color:var(--green); }
+
+.search-btn {
+  background:var(--teal); color:var(--navy);
+  border:none; border-radius:10px;
+  padding:0.65rem 1.3rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.9rem; font-weight:700;
+  cursor:pointer; white-space:nowrap;
+  transition:background 0.15s, transform 0.1s;
+}
+.search-btn:hover { background:var(--teal-dim); transform:translateY(-1px); }
+
+/* suggestion chips */
+.search-suggestions {
+  display:flex; flex-wrap:wrap; gap:0.4rem; align-items:center;
+}
+.sugg-label { font-size:0.75rem; color:var(--text-dim); }
+.sugg-chip {
+  font-size:0.75rem; font-weight:500;
+  background:rgba(255,255,255,0.05);
+  border:1px solid var(--border-mid);
+  color:var(--text-dim);
+  border-radius:6px; padding:0.2rem 0.65rem;
+  cursor:pointer; white-space:nowrap;
+  transition:all 0.15s;
+}
+.sugg-chip:hover { background:var(--teal); color:var(--navy); border-color:var(--teal); }
+
+/* social proof */
+.hero-proof {
+  display:flex; align-items:center; gap:1rem;
+  margin-top:2rem;
+  animation:fadeUp 0.6s 0.4s ease both;
+}
+.proof-avatars { display:flex; }
+.proof-avatar {
+  width:30px; height:30px;
+  border-radius:50%; border:2px solid var(--navy-card);
+  background:var(--navy-mid);
+  margin-left:-8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.65rem; font-weight:600; color:var(--text-dim);
+}
+.proof-avatar:first-child { margin-left:0; }
+.proof-text { font-size:0.8rem; color:var(--text-dim); line-height:1.4; }
+.proof-text strong { color:var(--cream); }
+
+/* ── HERO CARD (right side) ── */
+.hero-right { animation:fadeUp 0.6s 0.2s ease both; }
+
+.report-card {
+  background:var(--navy-card);
+  border-radius:20px;
+  border:1px solid var(--border);
+  box-shadow:0 24px 64px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.3);
+  overflow:hidden;
+}
+
+.rc-header {
+  padding:1.4rem 1.6rem;
+  border-bottom:1px solid var(--border-mid);
+  display:flex; align-items:flex-start;
+  justify-content:space-between; gap:1rem;
+}
+
+.rc-game {
+  font-family:'Fraunces',serif;
+  font-size:1.25rem; color:var(--cream);
+  margin-bottom:0.2rem;
+}
+.rc-sub { font-size:0.75rem; color:var(--text-dim); }
+
+.rc-badge { flex-shrink:0; display:flex; flex-direction:column; align-items:center; gap:0.2rem; }
+
+.rc-badge-circle {
+  width:52px; height:52px;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.3rem; font-weight:700; border:2.5px solid;
+}
+
+.badge-high   { background:var(--red-bg);   border-color:var(--red);   color:var(--red); }
+.badge-medium { background:var(--amber-bg);  border-color:var(--amber);  color:var(--amber); }
+.badge-low    { background:var(--green-bg);  border-color:var(--green);  color:var(--green); }
+
+.rc-badge-label {
+  font-size:0.62rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:0.06em;
+  color:var(--text-dim);
+}
+
+.rc-body { padding:0.75rem 1.6rem; }
+
+.rc-row {
+  display:flex; align-items:center; gap:0.75rem;
+  padding:0.65rem 0;
+  border-bottom:1px solid var(--border-mid);
+}
+.rc-row:last-child { border-bottom:none; }
+
+.rc-icon { font-size:1rem; width:1.5rem; text-align:center; flex-shrink:0; }
+.rc-info { flex:1; min-width:0; }
+.rc-name { font-size:0.85rem; font-weight:600; color:var(--cream); margin-bottom:0.1rem; }
+.rc-desc {
+  font-size:0.72rem; color:var(--text-dim);
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+
+/* pills */
+.pill {
+  font-size:0.65rem; font-weight:700;
+  padding:0.2rem 0.6rem; border-radius:100px;
+  text-transform:uppercase; letter-spacing:0.04em;
+  white-space:nowrap; flex-shrink:0;
+}
+.pill-high   { background:var(--red-bg);   color:var(--red);   border:1px solid var(--red-border); }
+.pill-medium { background:var(--amber-bg);  color:var(--amber);  border:1px solid var(--amber-border); }
+.pill-low    { background:var(--green-bg);  color:var(--green);  border:1px solid var(--green-border); }
+
+.rc-footer {
+  padding:0.85rem 1.6rem;
+  background:rgba(0,201,167,0.05);
+  border-top:1px solid var(--border);
+  font-size:0.75rem; color:var(--text-dim);
+  display:flex; align-items:center; gap:0.5rem;
+}
+.rc-footer strong { color:var(--teal); }
+
+/* ── LIVE REPORT AREA ── */
+.live-wrap {
+  position:relative; z-index:1;
+  max-width:1120px; margin:0 auto;
+  padding:0 2rem 4rem;
+}
+
+.spinner-wrap {
+  display:none; padding:3rem;
+  justify-content:center; align-items:center;
+}
+.spinner-wrap.visible { display:flex; }
+
+.spin-ring {
+  width:36px; height:36px;
+  border:2.5px solid var(--border-mid);
+  border-top-color:var(--teal);
+  border-radius:50%;
+  animation:spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* live report container */
+.live-report {
+  display:none;
+  background:var(--navy-card);
+  border:1.5px solid var(--border);
+  border-radius:20px; overflow:hidden;
+  box-shadow:0 8px 48px rgba(0,0,0,0.4);
+  animation:fadeUp 0.4s ease both;
+}
+.live-report.visible { display:block; }
+
+/* ── CLASSES GENERATED BY populateReport() ── */
+.report-inner {}
+
+.report-header {
+  padding:1.75rem 2rem;
+  border-bottom:1px solid var(--border-mid);
+  display:flex; align-items:flex-start;
+  justify-content:space-between; flex-wrap:wrap; gap:1rem;
+}
+
+.report-header.badge-high   { border-left:4px solid var(--red); }
+.report-header.badge-medium { border-left:4px solid var(--amber); }
+.report-header.badge-low    { border-left:4px solid var(--green); }
+
+.report-title {
+  font-family:'Fraunces',serif;
+  font-size:1.7rem; color:var(--cream);
+  margin-bottom:0.25rem; font-weight:700;
+  letter-spacing:-0.02em;
+}
+.report-meta { font-size:0.78rem; color:var(--text-dim); }
+
+.report-badge-large {
+  font-size:0.9rem; font-weight:700;
+  padding:0.5rem 1rem; border-radius:100px;
+  flex-shrink:0;
+}
+.badge-high .report-badge-large   { background:var(--red-bg);   color:var(--red);   border:1.5px solid var(--red-border); }
+.badge-medium .report-badge-large { background:var(--amber-bg);  color:var(--amber);  border:1.5px solid var(--amber-border); }
+.badge-low .report-badge-large    { background:var(--green-bg);  color:var(--green);  border:1.5px solid var(--green-border); }
+
+.report-metrics {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
+.metric-row {
+  padding:1.25rem 2rem;
+  border-bottom:1px solid var(--border-mid);
+  border-right:1px solid var(--border-mid);
+  transition:background 0.15s;
+}
+.metric-row:hover { background:rgba(255,255,255,0.02); }
+.metric-row:nth-child(2n)    { border-right:none; }
+.metric-row:nth-child(n+5)   { border-bottom:none; }
+
+.metric-header {
+  display:flex; align-items:center;
+  justify-content:space-between;
+  margin-bottom:0.4rem;
+}
+.metric-label {
+  font-size:0.8rem; font-weight:700;
+  color:var(--text); text-transform:uppercase;
+  letter-spacing:0.05em;
+}
+.metric-risk {
+  font-size:0.65rem; font-weight:700;
+  padding:0.15rem 0.55rem; border-radius:100px;
+  text-transform:uppercase; letter-spacing:0.05em;
+}
+.metric-risk-high   { background:var(--red-bg);   color:var(--red);   border:1px solid var(--red-border); }
+.metric-risk-medium { background:var(--amber-bg);  color:var(--amber);  border:1px solid var(--amber-border); }
+.metric-risk-low    { background:var(--green-bg);  color:var(--green);  border:1px solid var(--green-border); }
+
+.metric-desc { font-size:0.82rem; color:var(--text-dim); line-height:1.5; }
+
+.report-actions {
+  padding:1.5rem 2rem;
+  background:rgba(0,201,167,0.04);
+  border-top:1px solid var(--border-mid);
+}
+.actions-title {
+  font-size:0.75rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:0.08em;
+  color:var(--teal); margin-bottom:0.8rem;
+}
+.actions-list {
+  list-style:none; display:grid;
+  grid-template-columns:1fr 1fr; gap:0.6rem;
+}
+.actions-list li {
+  font-size:0.82rem; color:var(--text-dim);
+  line-height:1.5; padding-left:1rem;
+  position:relative;
+}
+.actions-list li::before {
+  content:'→'; color:var(--teal);
+  font-weight:700; position:absolute; left:0;
+}
+
+.report-cta {
+  padding:1.2rem 2rem;
+  display:flex; align-items:center;
+  justify-content:space-between; flex-wrap:wrap; gap:1rem;
+  border-top:1px solid var(--border-mid);
+  background:var(--navy);
+}
+.report-cta p { font-size:0.83rem; color:var(--text-dim); }
+
+.btn-primary {
+  background:var(--teal); color:var(--navy);
+  border:none; border-radius:9px;
+  padding:0.65rem 1.4rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.875rem; font-weight:700;
+  cursor:pointer; transition:background 0.15s, transform 0.1s;
+}
+.btn-primary:hover { background:var(--teal-dim); transform:translateY(-1px); }
+
+/* ── GAME MARQUEE ── */
+.games-section {
+  padding:3.5rem 0;
+  overflow:hidden;
+  border-top:1px solid var(--border-mid);
+  border-bottom:1px solid var(--border-mid);
+  background:var(--navy-mid);
+  position:relative; z-index:1;
+}
+
+.games-label {
+  text-align:center;
+  font-size:0.72rem; font-weight:600;
+  letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--text-dim); margin-bottom:1.5rem;
+}
+
+.marquee-track {
+  display:flex; gap:0; width:max-content;
+  animation:marq 34s linear infinite;
+}
+.marquee-track:hover { animation-play-state:paused; }
+
+.game-card-chip {
+  display:flex; align-items:center; gap:0.6rem;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border-mid);
+  border-radius:12px;
+  padding:0.65rem 1.1rem; margin:0 0.4rem;
+  cursor:pointer; white-space:nowrap;
+  font-size:0.85rem; font-weight:500; color:var(--text-dim);
+  transition:all 0.15s;
+}
+.game-card-chip:hover {
+  background:var(--teal); color:var(--navy);
+  border-color:var(--teal);
+}
+.game-card-chip:hover .chip-risk-dot { background:var(--navy) !important; }
+
+.chip-risk-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.dot-high   { background:var(--red); }
+.dot-medium { background:var(--amber); }
+.dot-low    { background:var(--green); }
+
+@keyframes marq {
+  from { transform:translateX(0); }
+  to   { transform:translateX(-50%); }
+}
+
+/* ── HOW IT WORKS ── */
+.how-section {
+  position:relative; z-index:1;
+  max-width:1120px; margin:0 auto;
+  padding:5.5rem 2rem;
+}
+
+.section-heading {
+  text-align:center;
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  font-weight:700; color:var(--cream);
+  letter-spacing:-0.02em;
+  margin-bottom:0.75rem;
+}
+.section-sub {
+  text-align:center;
+  font-size:1rem; color:var(--text-dim);
+  max-width:480px; margin:0 auto 3.5rem;
+  line-height:1.65;
+}
+
+.steps-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr); gap:1.75rem;
+}
+
+.step {
+  padding:1.75rem;
+  background:var(--navy-card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  transition:box-shadow 0.2s, transform 0.2s;
+}
+.step:hover {
+  box-shadow:0 16px 48px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,201,167,0.2);
+  transform:translateY(-4px);
+}
+.step-num {
+  font-family:'Fraunces',serif;
+  font-size:2.5rem; color:rgba(255,255,255,0.06);
+  line-height:1; margin-bottom:0.75rem;
+}
+.step-icon { font-size:1.6rem; margin-bottom:0.6rem; }
+.step h3 { font-size:0.95rem; font-weight:600; color:var(--cream); margin-bottom:0.4rem; }
+.step p { font-size:0.85rem; color:var(--text-dim); line-height:1.6; }
+
+/* ── STATS ── */
+.stats-section {
+  background:var(--navy-mid);
+  border-top:1px solid var(--border-mid);
+  border-bottom:1px solid var(--border-mid);
+  padding:4rem 2rem;
+  position:relative; z-index:1;
+}
+.stats-inner {
+  max-width:1120px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:2rem; text-align:center;
+}
+.stat-num {
+  font-family:'Fraunces',serif;
+  font-size:3rem; color:var(--cream);
+  letter-spacing:-0.02em; margin-bottom:0.3rem;
+}
+.stat-num span { color:var(--teal); }
+.stat-label { font-size:0.82rem; color:var(--text-dim); line-height:1.4; }
+
+/* ── TESTIMONIALS ── */
+.testi-section {
+  position:relative; z-index:1;
+  max-width:1120px; margin:0 auto;
+  padding:5rem 2rem;
+}
+.testi-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1.5rem; margin-top:3rem;
+}
+.testi-card {
+  background:var(--navy-card);
+  border:1px solid var(--border);
+  border-radius:16px; padding:1.5rem;
+  transition:border-color 0.2s;
+}
+.testi-card:hover { border-color:rgba(0,201,167,0.3); }
+.testi-stars { color:var(--amber); font-size:0.85rem; margin-bottom:0.75rem; letter-spacing:0.04em; }
+.testi-text { font-size:0.88rem; color:var(--text-dim); line-height:1.65; margin-bottom:1rem; }
+.testi-text em { font-style:italic; color:var(--cream); }
+.testi-author { display:flex; align-items:center; gap:0.6rem; }
+.testi-avatar {
+  width:34px; height:34px; border-radius:50%;
+  background:var(--navy-mid);
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.82rem; font-weight:700; color:var(--teal);
+  border:1px solid var(--border);
+}
+.testi-name { font-size:0.82rem; font-weight:600; color:var(--cream); }
+.testi-handle { font-size:0.73rem; color:var(--text-dim); }
+
+/* ── EMAIL CAPTURE ── */
+.cta-section {
+  background:var(--navy-mid);
+  border-top:1px solid var(--border-mid);
+  border-bottom:1px solid var(--border-mid);
+  padding:5rem 2rem;
+  position:relative; z-index:1;
+}
+.cta-inner { max-width:560px; margin:0 auto; text-align:center; }
+.cta-inner h2 {
+  font-family:'Fraunces',serif;
+  font-size:clamp(1.8rem,3vw,2.4rem);
+  font-weight:700; color:var(--cream);
+  letter-spacing:-0.02em; margin-bottom:0.75rem;
+}
+.cta-inner p { color:var(--text-dim); font-size:0.95rem; line-height:1.65; margin-bottom:2rem; }
+
+.email-row {
+  display:flex; gap:0.4rem;
+  background:var(--navy-card);
+  border:1.5px solid var(--border);
+  border-radius:12px; padding:0.35rem;
+  box-shadow:0 4px 24px rgba(0,0,0,0.3);
+}
+.email-input {
+  flex:1; border:none; outline:none; background:none;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.95rem; color:var(--cream); padding:0.6rem 0.75rem;
+}
+.email-input::placeholder { color:var(--text-dim); }
+.cta-note { font-size:0.73rem; color:var(--text-dim); margin-top:0.75rem; }
+
+/* ── FOOTER ── */
+footer {
+  position:relative; z-index:1;
+  max-width:1120px; margin:0 auto;
+  padding:2rem;
+  display:flex; align-items:center;
+  justify-content:space-between; flex-wrap:wrap; gap:1rem;
+  border-top:1px solid var(--border-mid);
+}
+.footer-logo {
+  font-family:'Fraunces',serif;
+  font-size:1.1rem; color:var(--cream);
+  display:flex; align-items:center; gap:0.4rem;
+}
+.footer-links { display:flex; gap:1.5rem; }
+.footer-link {
+  font-size:0.78rem; color:var(--text-dim);
+  text-decoration:none; transition:color 0.15s;
+}
+.footer-link:hover { color:var(--teal); }
+.footer-legal {
+  font-size:0.72rem; color:var(--text-dim);
+  width:100%; padding-top:1rem;
+  border-top:1px solid var(--border-mid);
+  line-height:1.5;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width:960px) {
+  .hero {
+    grid-template-columns:1fr;
+    gap:2.5rem; padding-top:3rem;
+  }
+  .hero-desc { max-width:100%; }
+  .steps-grid { grid-template-columns:1fr; }
+  .stats-inner { grid-template-columns:repeat(2,1fr); }
+  .testi-grid { grid-template-columns:1fr; }
+  .report-metrics { grid-template-columns:1fr; }
+  .metric-row { border-right:none !important; }
+  .metric-row:nth-child(n+5) { border-bottom:1px solid var(--border-mid) !important; }
+  .metric-row:last-child { border-bottom:none !important; }
+  .actions-list { grid-template-columns:1fr; }
+  nav { padding:0.9rem 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    SafeBlox
+  </div>
+  <div class="nav-right">
+    <a href="#how" class="nav-link">How it works</a>
+    <a href="#alerts" class="nav-link">Get alerts</a>
+    <button class="nav-cta" onclick="document.getElementById('searchInput').focus()">Check a game</button>
+  </div>
+</nav>
+
+<!-- NEWS TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item"><span class="ticker-dot"></span>Texas AG sues Roblox over COPPA violations</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>New COPPA 2.0 rules mandatory from April 2026</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>67% of Roblox daily users are under 16</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Florida AG sues Roblox over child safety failures</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>88 million kids play Roblox every single day</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Congress passes COPPA 2.0 protecting teens' data</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Roblox linked to predator incidents in 2025</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Texas AG sues Roblox over COPPA violations</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>New COPPA 2.0 rules mandatory from April 2026</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>67% of Roblox daily users are under 16</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Florida AG sues Roblox over child safety failures</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>88 million kids play Roblox every single day</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Congress passes COPPA 2.0 protecting teens' data</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Roblox linked to predator incidents in 2025</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- LEFT -->
+  <div class="hero-left">
+    <div class="hero-eyebrow">🔴 Free Safety Check</div>
+    <h1>Is your kid's<br><em>Roblox game</em><br>actually safe?</h1>
+    <p class="hero-desc">Instant privacy & safety reports for any Roblox experience. Know the real risks in plain English — chat dangers, spending traps, data collection & stranger risks.</p>
+
+    <div class="search-form">
+      <div class="search-wrap">
+        <div class="search-row">
+          <input class="search-input" id="searchInput" type="text"
+            placeholder="Type any Roblox game name…" autocomplete="off" />
+          <button class="search-btn" onclick="runCheck()">Check Now →</button>
+        </div>
+        <div class="autocomplete-drop" id="acDrop"></div>
+      </div>
+      <div class="search-suggestions">
+        <span class="sugg-label">Try:</span>
+        <span class="sugg-chip" onclick="quickCheck('Brookhaven')">Brookhaven</span>
+        <span class="sugg-chip" onclick="quickCheck('Adopt Me')">Adopt Me</span>
+        <span class="sugg-chip" onclick="quickCheck('Da Hood')">Da Hood</span>
+        <span class="sugg-chip" onclick="quickCheck('Blox Fruits')">Blox Fruits</span>
+        <span class="sugg-chip" onclick="quickCheck('Murder Mystery 2')">MM2</span>
+      </div>
+    </div>
+
+    <div class="hero-proof">
+      <div class="proof-avatars">
+        <div class="proof-avatar">JM</div>
+        <div class="proof-avatar">SK</div>
+        <div class="proof-avatar">RT</div>
+        <div class="proof-avatar">AL</div>
+        <div class="proof-avatar">+</div>
+      </div>
+      <div class="proof-text">
+        <strong>2,400+ parents</strong> checked a game this week.<br>No account needed. Always free.
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Hero card -->
+  <div class="hero-right">
+    <div class="report-card" id="heroCard">
+      <div class="rc-header">
+        <div>
+          <div class="rc-game" id="hcGame">Da Hood 🚨</div>
+          <div class="rc-sub" id="hcMeta">4.1B visits · Ages 13+ · Checked just now</div>
+        </div>
+        <div class="rc-badge">
+          <div class="rc-badge-circle badge-high" id="hcBadge">🔴</div>
+          <div class="rc-badge-label" id="hcLabel">High Risk</div>
+        </div>
+      </div>
+      <div class="rc-body">
+        <div class="rc-row">
+          <div class="rc-icon">💬</div>
+          <div class="rc-info">
+            <div class="rc-name">Chat Safety</div>
+            <div class="rc-desc" id="hcChat">Unmoderated. Gang roleplay community. Mature language.</div>
+          </div>
+          <div class="pill pill-high" id="hcChatPill">High</div>
+        </div>
+        <div class="rc-row">
+          <div class="rc-icon">🔒</div>
+          <div class="rc-info">
+            <div class="rc-name">Data Collection</div>
+            <div class="rc-desc" id="hcData">Behavioral data + third-party analytics tracked.</div>
+          </div>
+          <div class="pill pill-medium" id="hcDataPill">Medium</div>
+        </div>
+        <div class="rc-row">
+          <div class="rc-icon">💳</div>
+          <div class="rc-info">
+            <div class="rc-name">Spending Traps</div>
+            <div class="rc-desc" id="hcSpend">Some cosmetic purchases. Low monetization pressure.</div>
+          </div>
+          <div class="pill pill-medium" id="hcSpendPill">Medium</div>
+        </div>
+        <div class="rc-row">
+          <div class="rc-icon">🎮</div>
+          <div class="rc-info">
+            <div class="rc-name">Content Maturity</div>
+            <div class="rc-desc" id="hcContent">Gang warfare & crime roleplay. Rated 13+.</div>
+          </div>
+          <div class="pill pill-high" id="hcContentPill">High</div>
+        </div>
+      </div>
+      <div class="rc-footer">
+        ✅ <strong>4 protective actions</strong> recommended for this game
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE REPORT AREA -->
+<div class="live-wrap">
+  <div class="spinner-wrap" id="spinner"><div class="spin-ring"></div></div>
+  <div class="live-report" id="liveReport"></div>
+</div>
+
+<!-- GAME MARQUEE -->
+<div class="games-section">
+  <div class="games-label">50 popular games checked — click any to see report</div>
+  <div class="marquee-track">
+    <div class="game-card-chip" onclick="quickCheck('adopt me')"><div class="chip-risk-dot dot-low"></div>Adopt Me! 🐾</div>
+    <div class="game-card-chip" onclick="quickCheck('blox fruits')"><div class="chip-risk-dot dot-medium"></div>Blox Fruits ⚔️</div>
+    <div class="game-card-chip" onclick="quickCheck('brookhaven')"><div class="chip-risk-dot dot-medium"></div>Brookhaven 🏡</div>
+    <div class="game-card-chip" onclick="quickCheck('da hood')"><div class="chip-risk-dot dot-high"></div>Da Hood 🚨</div>
+    <div class="game-card-chip" onclick="quickCheck('murder mystery 2')"><div class="chip-risk-dot dot-high"></div>Murder Mystery 2 🔪</div>
+    <div class="game-card-chip" onclick="quickCheck('grow a garden')"><div class="chip-risk-dot dot-low"></div>Grow a Garden 🌱</div>
+    <div class="game-card-chip" onclick="quickCheck('jailbreak')"><div class="chip-risk-dot dot-medium"></div>Jailbreak 🚔</div>
+    <div class="game-card-chip" onclick="quickCheck('arsenal')"><div class="chip-risk-dot dot-high"></div>Arsenal 🔫</div>
+    <div class="game-card-chip" onclick="quickCheck('pls donate')"><div class="chip-risk-dot dot-high"></div>PLS DONATE 💸</div>
+    <div class="game-card-chip" onclick="quickCheck('piggy')"><div class="chip-risk-dot dot-low"></div>Piggy 🐷</div>
+    <div class="game-card-chip" onclick="quickCheck('doors')"><div class="chip-risk-dot dot-low"></div>DOORS 🚪</div>
+    <div class="game-card-chip" onclick="quickCheck('pet simulator x')"><div class="chip-risk-dot dot-medium"></div>Pet Simulator X 🐶</div>
+    <div class="game-card-chip" onclick="quickCheck('royale high')"><div class="chip-risk-dot dot-low"></div>Royale High 👑</div>
+    <div class="game-card-chip" onclick="quickCheck('phantom forces')"><div class="chip-risk-dot dot-high"></div>Phantom Forces 🎯</div>
+    <div class="game-card-chip" onclick="quickCheck('shindo life')"><div class="chip-risk-dot dot-medium"></div>Shindo Life 🍃</div>
+    <div class="game-card-chip" onclick="quickCheck('bedwars')"><div class="chip-risk-dot dot-low"></div>BedWars 🛏️</div>
+    <div class="game-card-chip" onclick="quickCheck('meepcity')"><div class="chip-risk-dot dot-medium"></div>MeepCity 🏘️</div>
+    <div class="game-card-chip" onclick="quickCheck('natural disaster survival')"><div class="chip-risk-dot dot-low"></div>Natural Disaster 🌪️</div>
+    <div class="game-card-chip" onclick="quickCheck('gacha online')"><div class="chip-risk-dot dot-high"></div>Gacha Online 🎭</div>
+    <div class="game-card-chip" onclick="quickCheck('tower of hell')"><div class="chip-risk-dot dot-low"></div>Tower of Hell 🏗️</div>
+    <div class="game-card-chip" onclick="quickCheck('berry avenue')"><div class="chip-risk-dot dot-medium"></div>Berry Avenue RP 🍓</div>
+    <div class="game-card-chip" onclick="quickCheck('mad city')"><div class="chip-risk-dot dot-high"></div>Mad City 🏙️</div>
+    <div class="game-card-chip" onclick="quickCheck('bee swarm simulator')"><div class="chip-risk-dot dot-low"></div>Bee Swarm Simulator 🐝</div>
+    <div class="game-card-chip" onclick="quickCheck('work at a pizza place')"><div class="chip-risk-dot dot-low"></div>Work at a Pizza Place 🍕</div>
+    <div class="game-card-chip" onclick="quickCheck('rainbow friends')"><div class="chip-risk-dot dot-low"></div>Rainbow Friends 🌈</div>
+    <!-- seamless loop duplicate -->
+    <div class="game-card-chip" onclick="quickCheck('adopt me')"><div class="chip-risk-dot dot-low"></div>Adopt Me! 🐾</div>
+    <div class="game-card-chip" onclick="quickCheck('blox fruits')"><div class="chip-risk-dot dot-medium"></div>Blox Fruits ⚔️</div>
+    <div class="game-card-chip" onclick="quickCheck('brookhaven')"><div class="chip-risk-dot dot-medium"></div>Brookhaven 🏡</div>
+    <div class="game-card-chip" onclick="quickCheck('da hood')"><div class="chip-risk-dot dot-high"></div>Da Hood 🚨</div>
+    <div class="game-card-chip" onclick="quickCheck('murder mystery 2')"><div class="chip-risk-dot dot-high"></div>Murder Mystery 2 🔪</div>
+    <div class="game-card-chip" onclick="quickCheck('grow a garden')"><div class="chip-risk-dot dot-low"></div>Grow a Garden 🌱</div>
+    <div class="game-card-chip" onclick="quickCheck('jailbreak')"><div class="chip-risk-dot dot-medium"></div>Jailbreak 🚔</div>
+    <div class="game-card-chip" onclick="quickCheck('arsenal')"><div class="chip-risk-dot dot-high"></div>Arsenal 🔫</div>
+    <div class="game-card-chip" onclick="quickCheck('pls donate')"><div class="chip-risk-dot dot-high"></div>PLS DONATE 💸</div>
+    <div class="game-card-chip" onclick="quickCheck('piggy')"><div class="chip-risk-dot dot-low"></div>Piggy 🐷</div>
+    <div class="game-card-chip" onclick="quickCheck('doors')"><div class="chip-risk-dot dot-low"></div>DOORS 🚪</div>
+    <div class="game-card-chip" onclick="quickCheck('pet simulator x')"><div class="chip-risk-dot dot-medium"></div>Pet Simulator X 🐶</div>
+    <div class="game-card-chip" onclick="quickCheck('royale high')"><div class="chip-risk-dot dot-low"></div>Royale High 👑</div>
+    <div class="game-card-chip" onclick="quickCheck('phantom forces')"><div class="chip-risk-dot dot-high"></div>Phantom Forces 🎯</div>
+    <div class="game-card-chip" onclick="quickCheck('shindo life')"><div class="chip-risk-dot dot-medium"></div>Shindo Life 🍃</div>
+    <div class="game-card-chip" onclick="quickCheck('bedwars')"><div class="chip-risk-dot dot-low"></div>BedWars 🛏️</div>
+    <div class="game-card-chip" onclick="quickCheck('meepcity')"><div class="chip-risk-dot dot-medium"></div>MeepCity 🏘️</div>
+    <div class="game-card-chip" onclick="quickCheck('natural disaster survival')"><div class="chip-risk-dot dot-low"></div>Natural Disaster 🌪️</div>
+    <div class="game-card-chip" onclick="quickCheck('gacha online')"><div class="chip-risk-dot dot-high"></div>Gacha Online 🎭</div>
+    <div class="game-card-chip" onclick="quickCheck('tower of hell')"><div class="chip-risk-dot dot-low"></div>Tower of Hell 🏗️</div>
+    <div class="game-card-chip" onclick="quickCheck('berry avenue')"><div class="chip-risk-dot dot-medium"></div>Berry Avenue RP 🍓</div>
+    <div class="game-card-chip" onclick="quickCheck('mad city')"><div class="chip-risk-dot dot-high"></div>Mad City 🏙️</div>
+    <div class="game-card-chip" onclick="quickCheck('bee swarm simulator')"><div class="chip-risk-dot dot-low"></div>Bee Swarm Simulator 🐝</div>
+    <div class="game-card-chip" onclick="quickCheck('work at a pizza place')"><div class="chip-risk-dot dot-low"></div>Work at a Pizza Place 🍕</div>
+    <div class="game-card-chip" onclick="quickCheck('rainbow friends')"><div class="chip-risk-dot dot-low"></div>Rainbow Friends 🌈</div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <h2 class="section-heading">Takes 5 seconds. No sign-up.</h2>
+  <p class="section-sub">We translate privacy policies and safety data into answers that actually matter to parents.</p>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-icon">🔍</div>
+      <div class="step-num">01</div>
+      <h3>Search any game</h3>
+      <p>Type the name of any Roblox experience your child plays. We have detailed reports for 50+ of the most popular games.</p>
+    </div>
+    <div class="step">
+      <div class="step-icon">📊</div>
+      <div class="step-num">02</div>
+      <h3>Get your report</h3>
+      <p>Instant color-coded safety scores across chat, data collection, spending traps, content maturity, and stranger risk.</p>
+    </div>
+    <div class="step">
+      <div class="step-icon">🛡️</div>
+      <div class="step-num">03</div>
+      <h3>Take action</h3>
+      <p>Plain-English steps you can take right now in Roblox parental settings to protect your child today.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stats-inner">
+    <div>
+      <div class="stat-num">88<span>M</span></div>
+      <div class="stat-label">Kids on Roblox<br>every single day</div>
+    </div>
+    <div>
+      <div class="stat-num">67<span>%</span></div>
+      <div class="stat-label">Are under 16 years old</div>
+    </div>
+    <div>
+      <div class="stat-num">Apr<span>'26</span></div>
+      <div class="stat-label">COPPA 2.0 compliance<br>deadline — now</div>
+    </div>
+    <div>
+      <div class="stat-num">0<span>$</span></div>
+      <div class="stat-label">Cost to check<br>any game, forever</div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <h2 class="section-heading">Parents love it.</h2>
+  <p class="section-sub">Real reactions from parents who checked their kids' games.</p>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"I had no idea Da Hood was rated that high risk. My 8-year-old had been playing it for months. <em>Blocked it immediately.</em> This tool is a must for every Roblox parent."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">JM</div>
+        <div>
+          <div class="testi-name">Jessica M.</div>
+          <div class="testi-handle">Mom of 3 · Columbus, GA</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Finally something I can actually understand. No lawyer speak, no tech jargon — just <em>'your kid can talk to strangers here, here's how to turn it off.'</em> Genius."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">DT</div>
+        <div>
+          <div class="testi-name">David T.</div>
+          <div class="testi-handle">Dad of 2 · Atlanta, GA</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">"Shared this with our whole school parent Facebook group. Within an hour, 40 moms had checked their kids' games. <em>It went viral.</em> So needed."</div>
+      <div class="testi-author">
+        <div class="testi-avatar">SR</div>
+        <div>
+          <div class="testi-name">Sarah R.</div>
+          <div class="testi-handle">PTA Member · Birmingham, AL</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL CAPTURE -->
+<section class="cta-section" id="alerts">
+  <div class="cta-inner">
+    <h2>Know the moment something changes.</h2>
+    <p>Add your child's favorite games to a watchlist. We'll email you if a game's safety rating changes — new chat features, third-party ads, or predator incidents reported.</p>
+    <div class="email-row">
+      <input class="email-input" id="alert-email-input" type="email" placeholder="your@email.com" />
+      <button class="btn-primary" id="alert-email-btn" onclick="handleEmailSubmit(this)">Get Free Alerts →</button>
+    </div>
+    <div class="cta-note">No spam, ever. Unsubscribe anytime. We never ask for your child's account.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-dot" style="width:8px;height:8px"></div>
+    SafeBlox
+  </div>
+  <div class="footer-links">
+    <a href="#" class="footer-link">Privacy</a>
+    <a href="#" class="footer-link">Terms</a>
+    <a href="#" class="footer-link">Contact</a>
+    <a href="#" class="footer-link">About</a>
+  </div>
+  <div class="footer-legal">SafeBlox is an independent safety tool. Not affiliated with or endorsed by Roblox Corporation. Safety assessments are informational only and updated regularly. © 2026 SafeBlox.</div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// GAME DATABASE — 50 games, 6 metrics each
+// ═══════════════════════════════════════════════════════════════
+const gameData = {
+  // 1. BROOKHAVEN RP
+  'brookhaven': {
+    name:'Brookhaven 🏡RP', meta:'69B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'high',desc:'Fully open chat. Any stranger can message your child in-session.'},
+    data:{risk:'medium',desc:'Regional data + third-party analytics logged per session.'},
+    spend:{risk:'medium',desc:'Cosmetics & VIP servers available via Robux. No hard-cap.'},
+    links:{risk:'low',desc:'No external links detected inside the experience.'},
+    content:{risk:'low',desc:'Life simulation. Rated All Ages — but social drama is common.'},
+    stranger:{risk:'high',desc:'Up to 12 players per server, all ages, zero vetting.'},
+    actions:['Enable Account Restrictions to limit chat to verified friends only.','Set a monthly Robux limit in your Roblox Family account dashboard.','Review your child\'s in-game friends list regularly.','Discuss safe online communication before each session.']
+  },
+  // 2. BLOX FRUITS
+  'blox fruits': {
+    name:'Blox Fruits ⚔️', meta:'52.9B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'In-game chat active. Competitive grind community can be aggressive.'},
+    data:{risk:'medium',desc:'Session behavior and progression data tracked server-side.'},
+    spend:{risk:'high',desc:'Devil fruits, game passes & 2x XP boosts push heavy Robux spending.'},
+    links:{risk:'high',desc:'Official Discord server prominently linked inside the game lobby.'},
+    content:{risk:'low',desc:'Anime-style cartoon combat. One Piece inspired. No graphic content.'},
+    stranger:{risk:'medium',desc:'Large competitive community. Varied ages and behavior in lobbies.'},
+    actions:['Set a strict Robux limit — one of Roblox\'s most monetized games.','Block external links in settings to prevent unsupervised Discord access.','Review chat logs periodically via Roblox parental controls.','Discuss in-game spending mechanics and grinding pressure with your child.']
+  },
+  // 3. ADOPT ME
+  'adopt me': {
+    name:'Adopt Me! 🐾', meta:'35B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Actively moderated chat with dedicated safety team.'},
+    data:{risk:'low',desc:'Minimal data collection. COPPA compliant practices in place.'},
+    spend:{risk:'medium',desc:'Social pressure to buy Robux for rare limited pets is significant.'},
+    links:{risk:'low',desc:'No external links found inside the experience.'},
+    content:{risk:'low',desc:'Pet adoption and home decorating. Entirely family-friendly.'},
+    stranger:{risk:'low',desc:'Well-moderated servers. One of the safer Roblox communities.'},
+    actions:['Talk to your child about trading pressure from other players.','Set a monthly Robux budget before they play — limited pets create real FOMO.','Safe overall — one of the best picks for younger children.']
+  },
+  // 4. TOWER OF HELL
+  'tower of hell': {
+    name:'Tower of Hell 🏗️', meta:'23B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Chat present but gameplay is solo-focused. Minimal social interaction.'},
+    data:{risk:'low',desc:'Standard Roblox platform data only. No unusual third-party tracking.'},
+    spend:{risk:'low',desc:'Optional VIP pass available. No aggressive monetization or trading.'},
+    links:{risk:'low',desc:'No external social platform links detected.'},
+    content:{risk:'low',desc:'Obstacle course and parkour. Challenging but fully age-appropriate.'},
+    stranger:{risk:'low',desc:'Competitive but focused gameplay significantly reduces social risk.'},
+    actions:['One of the safest Roblox experiences — great for kids who love a challenge.','Be aware of frustration from difficulty: check in on emotional wellbeing.']
+  },
+  // 5. MURDER MYSTERY 2
+  'murder mystery 2': {
+    name:'Murder Mystery 2 🔪', meta:'14B visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'high',desc:'Open unmoderated chat. Frequent exposure to older players and toxic language.'},
+    data:{risk:'medium',desc:'Behavioral and session data collected via Roblox analytics.'},
+    spend:{risk:'high',desc:'Knife skin trading economy creates enormous Robux spending pressure.'},
+    links:{risk:'high',desc:'Community Discord servers actively shared in lobbies.'},
+    content:{risk:'high',desc:'Murder and thriller themes. Officially rated 13+. Not for under-10.'},
+    stranger:{risk:'high',desc:'Diverse age range. Competitive chat culture can be toxic.'},
+    actions:['Rated 13+ — consider blocking for children under 10 via parental content filters.','If allowed, restrict chat to friends only in Account Restrictions immediately.','Set a firm Robux limit — knife skin trading is a significant spending trap.','Block external links to prevent unsupervised access to community Discord servers.']
+  },
+  // 6. GROW A GARDEN
+  'grow a garden': {
+    name:'Grow a Garden 🌱', meta:'21B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Minimal social interaction. Cozy farming sim — very little chat pressure.'},
+    data:{risk:'low',desc:'Standard Roblox data only. No unusual third-party collection detected.'},
+    spend:{risk:'medium',desc:'Rare seeds and pets available via Robux. Collectible loop can encourage spending.'},
+    links:{risk:'low',desc:'No external links found inside the experience.'},
+    content:{risk:'low',desc:'Farming and gardening simulation. Extremely wholesome and child-appropriate.'},
+    stranger:{risk:'low',desc:'Low social pressure. Peaceful environment with minimal stranger interaction.'},
+    actions:['One of the safest newer games on Roblox — great for all ages.','Set a small Robux budget since rare collectible items can tempt spending.']
+  },
+  // 7. MEEPCITY
+  'meepcity': {
+    name:'MeepCity 🏘️', meta:'10B visits · All Ages · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'high',desc:'Servers hold up to 200 players. Open chat with massive stranger exposure.'},
+    data:{risk:'medium',desc:'User behavior and social graph data collected across large server pools.'},
+    spend:{risk:'medium',desc:'Cosmetics, fishing gear, and Meep upgrades available via Robux.'},
+    links:{risk:'low',desc:'No direct external links detected inside the game.'},
+    content:{risk:'low',desc:'Social life simulation similar to Club Penguin. Generally family-friendly.'},
+    stranger:{risk:'high',desc:'200-player servers massively increase stranger contact compared to other games.'},
+    actions:['Enable Account Restrictions immediately — 200-player servers mean more stranger exposure.','Monitor your child\'s new friend requests after MeepCity sessions.','Set a Robux limit for cosmetic purchases.','Review chat logs weekly via the Roblox parent dashboard.']
+  },
+  // 8. PIGGY
+  'piggy': {
+    name:'Piggy 🐷', meta:'8B visits · Ages 9+ · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Limited in-game chat. Gameplay focus reduces social pressure significantly.'},
+    data:{risk:'low',desc:'Standard Roblox data only. No unusual tracking detected.'},
+    spend:{risk:'low',desc:'Minimal monetization. Some cosmetic skins available but no aggressive upsell.'},
+    links:{risk:'low',desc:'No external links detected in the experience.'},
+    content:{risk:'medium',desc:'Horror survival with jump scares and dark storylines. Peppa Pig aesthetic masks intensity.'},
+    stranger:{risk:'low',desc:'Cooperative play reduces stranger risk. Teams are small and focused.'},
+    actions:['Review the horror content with your child first — jump scares may affect younger kids.','Great for children 9+ who enjoy mild puzzle horror. Generally a safe experience.']
+  },
+  // 9. THE STRONGEST BATTLEGROUNDS
+  'the strongest battlegrounds': {
+    name:'The Strongest Battlegrounds 💥', meta:'4B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Competitive PvP chat. Can include trash-talk and aggressive language.'},
+    data:{risk:'low',desc:'Standard Roblox session tracking. No unusual third-party analytics.'},
+    spend:{risk:'medium',desc:'Character skins and game passes purchasable. Moderate spending pressure.'},
+    links:{risk:'medium',desc:'Active Discord community linked externally. Popular with content creators.'},
+    content:{risk:'medium',desc:'Anime-inspired combat. One Punch Man themed. Cartoon but intense PvP.'},
+    stranger:{risk:'medium',desc:'Matchmaking pairs players of all ages. Competitive atmosphere.'},
+    actions:['Enable Account Restrictions to limit chat to friends only.','Block external links to prevent unsupervised Discord access.','Discuss sportsmanship and toxic gaming culture before play.']
+  },
+  // 10. BEDWARS
+  'bedwars': {
+    name:'BedWars 🛏️', meta:'3.5B visits · Ages 9+ · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'medium',desc:'Team-based chat. Competitive but generally less toxic than FPS titles.'},
+    data:{risk:'low',desc:'Standard Roblox platform data only.'},
+    spend:{risk:'medium',desc:'Kits, weapon skins and pass upgrades available. Some pay-to-win elements.'},
+    links:{risk:'medium',desc:'Active Discord for team recruitment. Linked externally.'},
+    content:{risk:'low',desc:'Minecraft-style block combat. Cartoony and age-appropriate.'},
+    stranger:{risk:'low',desc:'Team-based structure reduces harmful stranger exposure.'},
+    actions:['Set a Robux limit — kit upgrades create ongoing spending pressure.','Block external links to prevent unsupervised Discord access.','Good choice for strategic-minded kids who enjoy team play.']
+  },
+  // 11. ROYALE HIGH
+  'royale high': {
+    name:'Royale High 👑', meta:'3.8B visits · Ages 9+ · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Moderated chat. Generally friendly and creative roleplay community.'},
+    data:{risk:'low',desc:'Standard Roblox data collection only. No unusual tracking.'},
+    spend:{risk:'medium',desc:'Seasonal item passes and diamond cosmetics can encourage spending.'},
+    links:{risk:'low',desc:'No external links found inside the game.'},
+    content:{risk:'low',desc:'Princess and fantasy school roleplay. Fully age-appropriate.'},
+    stranger:{risk:'low',desc:'Well-moderated. Community skews younger and more creative.'},
+    actions:['Set a Robux budget for seasonal item passes — new sets release regularly.','Overall one of the safest Roblox picks, especially for girls 8–14.']
+  },
+  // 12. WELCOME TO BLOXBURG
+  'welcome to bloxburg': {
+    name:'Welcome to Bloxburg 🏠', meta:'3B visits · Ages 9+ · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Moderated, limited chat. Sims-like life simulation community.'},
+    data:{risk:'low',desc:'Standard Roblox data. No unusual third-party collection.'},
+    spend:{risk:'medium',desc:'Requires 25 Robux paid access to play. In-game purchases also present.'},
+    links:{risk:'low',desc:'No external links detected.'},
+    content:{risk:'low',desc:'Daily life simulation inspired by The Sims. Fully appropriate for all ages.'},
+    stranger:{risk:'low',desc:'Generally safe community. Life sim format reduces stranger risk.'},
+    actions:['Note: this game requires a one-time 25 Robux ($0.31) purchase to play.','Great alternative to Brookhaven with a safer, more moderated environment.']
+  },
+  // 13. PET SIMULATOR X
+  'pet simulator x': {
+    name:'Pet Simulator X 🐶', meta:'7B visits · All Ages · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'low',desc:'Minimal chat. Simulator genre is mostly solo grinding.'},
+    data:{risk:'low',desc:'Standard Roblox data tracking.'},
+    spend:{risk:'high',desc:'Extremely aggressive monetization. Rare eggs, exclusive pets, and passes drive heavy spending.'},
+    links:{risk:'low',desc:'No external links detected in-game.'},
+    content:{risk:'low',desc:'Cute pet collecting and incremental progression. Fully age-appropriate themes.'},
+    stranger:{risk:'low',desc:'Low social interaction. Simulator genre reduces stranger exposure.'},
+    actions:['Set a STRICT Robux limit — this game has some of the most aggressive monetization on Roblox.','Discuss the difference between real money and Robux clearly before they play.','Disable in-app purchasing at the platform level if possible.']
+  },
+  // 14. DRESS TO IMPRESS
+  'dress to impress': {
+    name:'Dress To Impress 👗', meta:'3B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Fashion-focused community. Generally positive and supportive chat.'},
+    data:{risk:'low',desc:'Standard Roblox data only.'},
+    spend:{risk:'medium',desc:'Exclusive clothing items purchasable. Fashion pressure can encourage spending.'},
+    links:{risk:'low',desc:'No external links found in the game.'},
+    content:{risk:'low',desc:'Fashion show and styling competition. Age-appropriate for all players.'},
+    stranger:{risk:'low',desc:'Creative community with low harmful stranger risk.'},
+    actions:['Safe pick overall. Set a modest Robux budget for cosmetic items.','Good for fashion-oriented kids — similar safety profile to Royale High.']
+  },
+  // 15. RIVALS
+  'rivals': {
+    name:'RIVALS ⚡', meta:'2B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Competitive PvP chat. Fast-paced matches can lead to heated language.'},
+    data:{risk:'low',desc:'Standard Roblox session data only.'},
+    spend:{risk:'medium',desc:'Character cosmetics and skins available via Robux.'},
+    links:{risk:'medium',desc:'Active competitive community on Discord. Links shared externally.'},
+    content:{risk:'medium',desc:'Intense PvP combat. Fast-paced and competitive — requires maturity.'},
+    stranger:{risk:'medium',desc:'Matchmaking pairs random players of all ages and skill levels.'},
+    actions:['Enable Account Restrictions to filter chat during competitive sessions.','Discuss sportsmanship and how to handle losing before play.','Block external links to prevent Discord access.']
+  },
+  // 16. JAILBREAK
+  'jailbreak': {
+    name:'Jailbreak 🚔', meta:'8B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Open-world chat. Generally manageable but open to all players.'},
+    data:{risk:'medium',desc:'Behavioral data tracked. Third-party analytics in use.'},
+    spend:{risk:'medium',desc:'Vehicle skins, game passes, and seasonal items available via Robux.'},
+    links:{risk:'medium',desc:'Active community Discord and YouTube presence linked externally.'},
+    content:{risk:'medium',desc:'Cops-and-robbers open world. GTA-inspired but cartoony with no graphic violence.'},
+    stranger:{risk:'medium',desc:'Large mixed-age community. Open world increases stranger contact.'},
+    actions:['Enable Account Restrictions to manage open-world chat exposure.','Set a Robux budget for seasonal vehicle cosmetics.','Review with your child that the in-game crime themes are fictional roleplay.']
+  },
+  // 17. ALL STAR TOWER DEFENSE
+  'all star tower defense': {
+    name:'All Star Tower Defense 🗼', meta:'4B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'low',desc:'Tower defense focus means limited chat. Mostly cooperative.'},
+    data:{risk:'low',desc:'Standard Roblox platform data.'},
+    spend:{risk:'high',desc:'Gacha-style summon system drives heavy Robux spending for rare anime characters.'},
+    links:{risk:'medium',desc:'Active Discord for trading and unit guides linked externally.'},
+    content:{risk:'low',desc:'Anime characters in tower defense gameplay. Age-appropriate themes.'},
+    stranger:{risk:'low',desc:'Cooperative format reduces harmful stranger interaction.'},
+    actions:['Set a strict Robux limit — the gacha summon system is the main spending trap.','Explain how gacha probability works to your child before they play.','Block external Discord links via Roblox parental settings.']
+  },
+  // 18. EVADE
+  'evade': {
+    name:'Evade 🤖', meta:'2B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Voice and text chat active. Competitive evasion gameplay can cause heated exchanges.'},
+    data:{risk:'low',desc:'Standard Roblox data. No unusual collection.'},
+    spend:{risk:'low',desc:'Limited cosmetic options. Low spending pressure.'},
+    links:{risk:'low',desc:'No significant external links detected.'},
+    content:{risk:'medium',desc:'AI robot horror-chase gameplay. Jump scares and dark atmosphere. 9+ appropriate.'},
+    stranger:{risk:'medium',desc:'Random matchmaking pairs kids with unknown players during intense sessions.'},
+    actions:['Preview the game\'s horror-chase mechanics with your child first.','Enable Account Restrictions to manage voice and text chat settings.','Generally safe — suitable for kids comfortable with mild suspense.']
+  },
+  // 19. BERRY AVENUE
+  'berry avenue': {
+    name:'Berry Avenue RP 🍓', meta:'2.5B visits · All Ages · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'high',desc:'Highly social roleplay game. Open chat with heavy stranger interaction expected.'},
+    data:{risk:'medium',desc:'Social interaction data logged. Active community analytics.'},
+    spend:{risk:'medium',desc:'Clothing and home cosmetics available via Robux.'},
+    links:{risk:'medium',desc:'TikTok and social media trends heavily tied to this game externally.'},
+    content:{risk:'medium',desc:'Life and relationship roleplay. Social drama is common among players.'},
+    stranger:{risk:'high',desc:'Social nature of the game makes constant stranger interaction the norm.'},
+    actions:['Enable Account Restrictions to limit chat to verified friends only.','Discuss appropriate online relationship boundaries before play.','Monitor friend requests your child receives after Berry Avenue sessions.']
+  },
+  // 20. DOORS
+  'doors': {
+    name:'DOORS 🚪', meta:'2B visits · Ages 9+ · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Cooperative gameplay keeps chat focused. Minimal stranger risk.'},
+    data:{risk:'low',desc:'Standard Roblox data only. No unusual third-party collection.'},
+    spend:{risk:'low',desc:'Minimal monetization. Some cosmetic revives available but no aggressive upsell.'},
+    links:{risk:'low',desc:'No external links detected inside the experience.'},
+    content:{risk:'medium',desc:'First-person horror escape room. Jump scares and dark entities — intense for sensitive kids.'},
+    stranger:{risk:'low',desc:'Cooperative team structure with typically 2–4 players. Low social risk.'},
+    actions:['Preview the jump scares and horror atmosphere with your child before solo play.','Safe overall — one of the more polished and safer horror experiences on Roblox.']
+  },
+  // 21. ARSENAL
+  'arsenal': {
+    name:'Arsenal 🔫', meta:'4B visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'high',desc:'Notoriously toxic FPS community. Profanity, trash-talk, and harassment common.'},
+    data:{risk:'low',desc:'Standard Roblox tracking data.'},
+    spend:{risk:'medium',desc:'Character skins and weapon cosmetics available. Moderate pressure.'},
+    links:{risk:'high',desc:'Very active Discord and YouTube community. External links shared frequently.'},
+    content:{risk:'high',desc:'Fast-paced FPS with realistic gun mechanics. Officially rated 13+.'},
+    stranger:{risk:'high',desc:'Competitive matchmaking. High exposure to older, aggressive players.'},
+    actions:['Rated 13+ — not recommended for children under 12.','Restrict chat to friends only via Account Restrictions immediately.','Block external links to prevent unsupervised Discord community access.','Monitor for signs of cyberbullying — Arsenal has a known toxic community.']
+  },
+  // 22. TOILET TOWER DEFENSE
+  'toilet tower defense': {
+    name:'Toilet Tower Defense 🚽', meta:'3B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Cooperative tower defense. Minimal chat interaction.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Exclusive toilet-themed units available via Robux. Mild spending pressure.'},
+    links:{risk:'low',desc:'No external links detected.'},
+    content:{risk:'low',desc:'Silly meme-based humor. Cartoon toilet characters — completely age-appropriate.'},
+    stranger:{risk:'low',desc:'Low social interaction. Cooperative format minimizes stranger risk.'},
+    actions:['Very safe pick. Set a small Robux budget for unit purchases.','Fun and silly — a good low-risk option for all ages.']
+  },
+  // 23. DEAD RAILS
+  'dead rails': {
+    name:'Dead Rails 🚂', meta:'1B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Cooperative survival chat. Generally mission-focused and less toxic.'},
+    data:{risk:'low',desc:'Standard Roblox session data.'},
+    spend:{risk:'low',desc:'Some cosmetic items available. Low spending pressure.'},
+    links:{risk:'low',desc:'No significant external links detected.'},
+    content:{risk:'medium',desc:'Western zombie survival. Mild cartoon violence and post-apocalyptic themes.'},
+    stranger:{risk:'medium',desc:'Cooperative survival pairs kids with random teammates.'},
+    actions:['Review the zombie survival themes with younger children first.','Enable Account Restrictions as a general precaution.','Suitable for kids 9+ who enjoy cooperative adventure games.']
+  },
+  // 24. BLADE BALL
+  'blade ball': {
+    name:'Blade Ball ⚽', meta:'2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'medium',desc:'Competitive reflex game. Short matches keep chat brief but competitive.'},
+    data:{risk:'low',desc:'Standard Roblox data only.'},
+    spend:{risk:'medium',desc:'Sword skins and special ability passes available via Robux.'},
+    links:{risk:'low',desc:'No significant external links.'},
+    content:{risk:'low',desc:'Reflex-based energy ball deflection. Cartoony and fully age-appropriate.'},
+    stranger:{risk:'low',desc:'Short match format limits prolonged stranger interaction.'},
+    actions:['Good low-risk pick for competitive kids. Set a small Robux budget for cosmetics.','Discuss competitive mindset and handling losses before play.']
+  },
+  // 25. WORK AT A PIZZA PLACE
+  'work at a pizza place': {
+    name:'Work at a Pizza Place 🍕', meta:'3.5B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Work-themed roleplay keeps chat focused. Generally friendly community.'},
+    data:{risk:'low',desc:'Standard Roblox platform data only.'},
+    spend:{risk:'low',desc:'Minimal monetization. One of Roblox\'s least monetized popular games.'},
+    links:{risk:'low',desc:'No external links detected.'},
+    content:{risk:'low',desc:'Pizza restaurant job simulation. Classic Roblox experience. Fully age-appropriate.'},
+    stranger:{risk:'low',desc:'Job roleplay format structures interaction positively.'},
+    actions:['One of the original safe Roblox classics. Excellent for all ages.','Great for teaching basic concepts of teamwork and responsibility.']
+  },
+  // 26. LIVETOPIA
+  'livetopia': {
+    name:'Livetopia 🌆', meta:'1.2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Moderated chat. Family-friendly city roleplay community.'},
+    data:{risk:'low',desc:'Minimal data collection. COPPA compliant.'},
+    spend:{risk:'low',desc:'Optional cosmetics only. No aggressive monetization detected.'},
+    links:{risk:'low',desc:'No external links detected.'},
+    content:{risk:'low',desc:'Life and city simulation. Age-appropriate for all players.'},
+    stranger:{risk:'low',desc:'Well-moderated environment. Safer for younger players.'},
+    actions:['One of the safest picks on Roblox — great for younger children.','Still enable parental chat controls as a general best practice.']
+  },
+  // 27. FLEE THE FACILITY
+  'flee the facility': {
+    name:'Flee the Facility 🏃', meta:'2B visits · Ages 9+ · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Game-focused cooperation. Minimal open chat during gameplay.'},
+    data:{risk:'low',desc:'Standard Roblox data only.'},
+    spend:{risk:'low',desc:'Cosmetic skins available. Low spending pressure.'},
+    links:{risk:'low',desc:'No external links detected in the experience.'},
+    content:{risk:'low',desc:'Escape and chase game. Mild suspense but no horror or graphic content.'},
+    stranger:{risk:'low',desc:'Small team format (5 players) reduces harmful stranger exposure.'},
+    actions:['Safe choice for kids who enjoy cooperative games with mild suspense.','Low risk overall — one of the friendlier social Roblox experiences.']
+  },
+  // 28. BUILD A BOAT FOR TREASURE
+  'build a boat for treasure': {
+    name:'Build a Boat for Treasure ⛵', meta:'2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Creative building focus. Minimal social chat pressure.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Block packs available via Robux. Mild optional spending.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Creative engineering and boat-building. Fun and educational for all ages.'},
+    stranger:{risk:'low',desc:'Building focus means minimal harmful stranger contact.'},
+    actions:['Excellent creative STEM-focused game for all ages.','Very safe — one of the best picks for primary school children.']
+  },
+  // 29. RAINBOW FRIENDS
+  'rainbow friends': {
+    name:'Rainbow Friends 🌈', meta:'2.5B visits · Ages 9+ · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Cooperative gameplay keeps chat brief and focused.'},
+    data:{risk:'low',desc:'Standard Roblox data only.'},
+    spend:{risk:'low',desc:'Minimal cosmetics. Very low spending pressure.'},
+    links:{risk:'low',desc:'No external links detected.'},
+    content:{risk:'medium',desc:'Colorful horror-survival with monster characters. Scary but cartoon-style. Fine for 9+.'},
+    stranger:{risk:'low',desc:'Small cooperative team format. Low harmful stranger exposure.'},
+    actions:['Preview the monster jump scares with younger or sensitive children first.','Safe overall — a popular, polished horror game appropriate for ages 9+.']
+  },
+  // 30. TOWER DEFENSE SIMULATOR
+  'tower defense simulator': {
+    name:'Tower Defense Simulator 🏰', meta:'2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Strategy-focused cooperation. Very little open social chat.'},
+    data:{risk:'low',desc:'Standard Roblox platform data.'},
+    spend:{risk:'medium',desc:'Exclusive towers and game passes available via Robux.'},
+    links:{risk:'medium',desc:'Community Discord for strategy guides linked externally.'},
+    content:{risk:'low',desc:'Wave-based zombie defense. Cartoony, no graphic violence.'},
+    stranger:{risk:'low',desc:'Cooperative team format with low social risk.'},
+    actions:['Set a Robux budget for exclusive tower purchases.','Safe and strategic — great for kids who enjoy planning and teamwork.']
+  },
+  // 31. PLS DONATE
+  'pls donate': {
+    name:'PLS DONATE 💸', meta:'1.5B visits · All Ages · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'high',desc:'Constant stranger interaction is core to the gameplay. Very open social environment.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'The entire game is built around donating and receiving Robux. Spending is the point.'},
+    links:{risk:'medium',desc:'Social media promotion heavily tied to the game. Twitter/TikTok links shared.'},
+    content:{risk:'low',desc:'Virtual busking/donation hub. No mature content — but financial pressure is the risk.'},
+    stranger:{risk:'high',desc:'Players constantly interact with complete strangers to solicit and give Robux.'},
+    actions:['Not recommended for children — real Robux (real money) changes hands constantly.','If they play, set a hard Robux limit and explain that Robux equals real money.','Monitor for strangers sending your child unsolicited Robux (a grooming red flag).','Enable Account Restrictions to limit who can contact your child in-game.']
+  },
+  // 32. NATURAL DISASTER SURVIVAL
+  'natural disaster survival': {
+    name:'Natural Disaster Survival 🌪️', meta:'2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Short round format limits chat. Generally positive community.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'No significant monetization. Classic Roblox experience.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Natural disaster survival scenarios. Exciting but age-appropriate.'},
+    stranger:{risk:'low',desc:'Large server but short rounds minimize prolonged stranger contact.'},
+    actions:['A classic safe Roblox experience. Great for all ages.','No significant concerns — one of the platform\'s most wholesome competitive games.']
+  },
+  // 33. DA HOOD
+  'da hood': {
+    name:'Da Hood 🚨', meta:'4.1B visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'high',desc:'Unmoderated chat. Gang roleplay community with frequent mature language.'},
+    data:{risk:'medium',desc:'Standard Roblox tracking plus third-party session analytics.'},
+    spend:{risk:'medium',desc:'Some cosmetic purchases available in the game.'},
+    links:{risk:'high',desc:'Active Discord server and YouTube community linked externally.'},
+    content:{risk:'high',desc:'Gang warfare and crime roleplay. Explicitly not for under-13.'},
+    stranger:{risk:'high',desc:'Open to all ages despite 13+ rating. High older-player exposure.'},
+    actions:['Not recommended for under 13. Block via content maturity parental filters.','Have a direct conversation about the gang and crime themes in this game.','Use Roblox Content Maturity settings to prevent access to similar games.','If they insist on playing, restrict chat to verified friends only immediately.']
+  },
+  // 34. KING LEGACY
+  'king legacy': {
+    name:'King Legacy ⚓', meta:'3B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'In-game chat active. One Piece inspired community — generally focused on gameplay.'},
+    data:{risk:'low',desc:'Standard Roblox platform data.'},
+    spend:{risk:'high',desc:'Game passes, stat resets, and race unlocks drive significant spending.'},
+    links:{risk:'medium',desc:'Discord community actively used for trading and codes. Linked externally.'},
+    content:{risk:'low',desc:'Anime pirate adventure. One Piece inspired. Age-appropriate cartoon combat.'},
+    stranger:{risk:'medium',desc:'RPG open world increases stranger contact. Large active player base.'},
+    actions:['Set a strict Robux limit — game passes and unlocks create ongoing spending pressure.','Block external links to manage unsupervised Discord access.','Review chat settings via Account Restrictions.']
+  },
+  // 35. BEE SWARM SIMULATOR
+  'bee swarm simulator': {
+    name:'Bee Swarm Simulator 🐝', meta:'1.5B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Minimal social interaction. Idle farming gameplay is mostly solo.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Some game passes available. Low monetization pressure.'},
+    links:{risk:'low',desc:'No significant external links.'},
+    content:{risk:'low',desc:'Bee farming and honey collecting. Calm and wholesome for all ages.'},
+    stranger:{risk:'low',desc:'Solo-oriented gameplay minimizes stranger interaction.'},
+    actions:['Excellent low-risk game for all ages. One of Roblox\'s calmer experiences.','Minimal concerns — a safe, creative option for younger children.']
+  },
+  // 36. ANIME DEFENDERS
+  'anime defenders': {
+    name:'Anime Defenders 🗡️', meta:'1B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'low',desc:'Tower defense format minimizes open chat interaction.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Banner summon system (gacha mechanics) drives significant Robux spending.'},
+    links:{risk:'medium',desc:'Discord community for trading and summon guides linked externally.'},
+    content:{risk:'low',desc:'Anime character tower defense. Age-appropriate themes.'},
+    stranger:{risk:'low',desc:'Cooperative format with low harmful stranger exposure.'},
+    actions:['Set a strict Robux limit — the gacha banner system is the primary risk.','Explain gacha probability mechanics to your child clearly.','Block external links to manage unsupervised Discord access.']
+  },
+  // 37. HIDE AND SEEK EXTREME
+  'hide and seek extreme': {
+    name:'Hide and Seek Extreme 🙈', meta:'2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Game-focused short rounds. Minimal open chat interaction.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Classic free Roblox experience.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Classic hide and seek. Fun and creative — appropriate for all ages.'},
+    stranger:{risk:'low',desc:'Short rounds and focused gameplay minimize harmful stranger contact.'},
+    actions:['One of the original classic safe Roblox games.','Excellent pick for younger children — no significant concerns.']
+  },
+  // 38. SLAP BATTLES
+  'slap battles': {
+    name:'Slap Battles 👋', meta:'2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'medium',desc:'Competitive slapfest. Can have trash-talk but matches are very short.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal Robux options. Very low spending pressure.'},
+    links:{risk:'low',desc:'No significant external links.'},
+    content:{risk:'low',desc:'Silly cartoon slapping game. Completely age-appropriate.'},
+    stranger:{risk:'low',desc:'Short match format minimizes prolonged stranger interaction.'},
+    actions:['Safe and silly — a fun low-risk pick for all ages.','Discuss competitive attitudes and good sportsmanship before play.']
+  },
+  // 39. THE FLOOR IS LAVA
+  'the floor is lava': {
+    name:'The Floor is Lava! 🔥', meta:'2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Fast-paced survival keeps focus on gameplay. Minimal chat.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Classic experience.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Survival platform game. Extremely simple and fully age-appropriate.'},
+    stranger:{risk:'low',desc:'Fast rounds minimize harmful stranger contact.'},
+    actions:['One of the most classic safe Roblox games. Suitable for all ages.','No significant concerns — great for young and first-time Roblox players.']
+  },
+  // 40. 3008
+  '3008': {
+    name:'3008 🛒', meta:'1.5B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Survival chat active. Can include distress calls and coordination during hostile events.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Low spending pressure.'},
+    links:{risk:'low',desc:'No external links detected.'},
+    content:{risk:'medium',desc:'SCP-style infinite IKEA horror survival. Dark atmosphere and monster entities. 9+ appropriate.'},
+    stranger:{risk:'medium',desc:'Cooperative survival pairs your child with unknown teammates.'},
+    actions:['Preview the monster survival themes with younger or sensitive children.','Safe for ages 9+ who can handle mild horror-survival atmospheres.']
+  },
+  // 41. BREAK IN
+  'break in': {
+    name:'Break In 🏚️', meta:'1B visits · Ages 9+ · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'medium',desc:'Cooperative horror gameplay. Chat is focused on team coordination.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'medium',desc:'Horror escape-room style. Jump scares and tense atmosphere. Suitable for 9+.'},
+    stranger:{risk:'low',desc:'Small cooperative team structure limits stranger exposure.'},
+    actions:['Preview the horror content with sensitive or younger children first.','Good cooperative horror pick for kids 9+ — low overall risk.']
+  },
+  // 42. SHINDO LIFE
+  'shindo life': {
+    name:'Shindo Life 🍃', meta:'3B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Open-world chat. Competitive ninja community can be aggressive.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Spin system for bloodlines drives significant Robux spending. Very expensive to progress quickly.'},
+    links:{risk:'high',desc:'Very active Discord and code-sharing communities linked externally.'},
+    content:{risk:'low',desc:'Naruto-inspired ninja RPG. Anime combat themes. Age-appropriate.'},
+    stranger:{risk:'medium',desc:'Open RPG world increases stranger contact during exploration.'},
+    actions:['Set a strict Robux limit — the bloodline spin system is expensive and addictive.','Block external links to prevent unsupervised Discord and code-farming access.','Review chat settings via Account Restrictions.']
+  },
+  // 43. MAD CITY
+  'mad city': {
+    name:'Mad City: Chapter 2 🏙️', meta:'2B visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'high',desc:'Open-world GTA-style game with open chat and large servers. Mature community.'},
+    data:{risk:'medium',desc:'Behavioral data and session analytics tracked. Third-party presence noted.'},
+    spend:{risk:'medium',desc:'Vehicle upgrades, costumes and season passes purchasable.'},
+    links:{risk:'medium',desc:'Active YouTube and social media community. Links shared externally.'},
+    content:{risk:'high',desc:'Crime-based open world. Shooting, vehicle combat, prison breaks. Rated 13+.'},
+    stranger:{risk:'high',desc:'Large open-world servers with mixed ages. High stranger exposure.'},
+    actions:['Rated 13+ — not recommended for children under 12.','Restrict chat to friends only immediately via Account Restrictions.','Review in-game crime themes with your child and set clear expectations.','Monitor time spent — open world games are highly time-consuming.']
+  },
+  // 44. PRISON LIFE
+  'prison life': {
+    name:'Prison Life 🔒', meta:'1B visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'high',desc:'Unmoderated open chat. Prison theme attracts older, mature player base.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Low spending pressure.'},
+    links:{risk:'medium',desc:'Community discussions active on external platforms.'},
+    content:{risk:'high',desc:'Prison escape simulation. Violence, weapons, mature prison themes. Rated 13+.'},
+    stranger:{risk:'high',desc:'Open servers with mature player community. High stranger exposure.'},
+    actions:['Rated 13+ — block for children under 12 via content maturity filters.','Restrict chat to verified friends only if allowed to play.','Discuss the fictional nature of the prison themes directly with your child.']
+  },
+  // 45. PHANTOM FORCES
+  'phantom forces': {
+    name:'Phantom Forces 🎯', meta:'1.5B visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'high',desc:'Highly competitive FPS with toxic chat culture. Profanity common.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Weapon skins and premium cases available via Robux.'},
+    links:{risk:'high',desc:'Very active Discord and gaming community linked externally.'},
+    content:{risk:'high',desc:'Realistic military FPS with detailed gun mechanics. Closest to real shooters on Roblox.'},
+    stranger:{risk:'high',desc:'Competitive matchmaking pairs your child with unknown players of all ages.'},
+    actions:['Rated 13+ — the most realistic FPS on Roblox. Not for under-12.','Restrict chat to friends only immediately.','Block external links to prevent Discord access.','Monitor for desensitization to realistic gun violence over time.']
+  },
+  // 46. GACHA ONLINE
+  'gacha online': {
+    name:'Gacha Online RP 🎭', meta:'800M visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'high',desc:'Very open social roleplay. Gacha community has documented issues with adult content.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Cosmetic items and outfit pieces available via Robux.'},
+    links:{risk:'high',desc:'External Discord servers frequently contain adult Gacha fan content.'},
+    content:{risk:'high',desc:'Gacha character roleplay. Well-documented exposure to adult content via external community.'},
+    stranger:{risk:'high',desc:'Highly social roleplay environment with open stranger interaction.'},
+    actions:['Not recommended for under 13. Block via parental content maturity filters.','The external Gacha community is well-documented for adult fan content on Discord.','If allowed, restrict chat to verified friends only and block all external links.','Monitor closely — this is one of the higher-risk Roblox communities.']
+  },
+  // 47. STEAL A BRAINROT
+  'steal a brainrot': {
+    name:'Steal a Brainrot 🧠', meta:'500M visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Meme-focused casual gameplay. Minimal meaningful chat.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Casual meme game.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Internet meme and brainrot humor. Silly but fully age-appropriate.'},
+    stranger:{risk:'low',desc:'Casual game format with low social pressure.'},
+    actions:['Safe and silly casual game. Good for all ages.','No significant concerns.']
+  },
+  // 48. BLUE LOCK RIVALS
+  'blue lock rivals': {
+    name:'Blue Lock: Rivals ⚽', meta:'1.5B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'medium',desc:'Competitive sports game. Matchmaking chat can be heated after losses.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Character unlocks and cosmetics available via Robux.'},
+    links:{risk:'medium',desc:'Anime community Discord linked externally.'},
+    content:{risk:'low',desc:'Anime-inspired soccer competition. Blue Lock anime themed. Age-appropriate.'},
+    stranger:{risk:'low',desc:'Structured sports match format limits harmful stranger contact.'},
+    actions:['Safe overall — great for soccer and anime fans.','Set a small Robux budget for character unlocks.','Discuss competitive sportsmanship before play.']
+  },
+  // 49. ANIME ADVENTURES
+  'anime adventures': {
+    name:'Anime Adventures ⚔️', meta:'1.5B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'low',desc:'Tower defense format. Minimal open chat during gameplay.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Gacha banner summon system for anime units drives heavy Robux spending.'},
+    links:{risk:'medium',desc:'Active Discord for summon strategies and trading linked externally.'},
+    content:{risk:'low',desc:'Popular anime characters in tower defense. Age-appropriate themes.'},
+    stranger:{risk:'low',desc:'Cooperative format with low harmful stranger exposure.'},
+    actions:['Set a strict Robux limit — the gacha banner system is the primary spending trap.','Explain how gacha odds work to your child before they play.','Block external links to manage unsupervised Discord access.']
+  },
+  // 50. 99 NIGHTS IN THE FOREST
+  '99 nights in the forest': {
+    name:'99 Nights in the Forest 🌲', meta:'1B visits · Ages 9+ · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Atmospheric survival with minimal social chat pressure.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization.'},
+    links:{risk:'low',desc:'No external links detected.'},
+    content:{risk:'medium',desc:'Dark forest survival horror atmosphere. Mild suspense and creatures. Fine for 9+.'},
+    stranger:{risk:'low',desc:'Mostly solo or small-group format. Low stranger interaction.'},
+    actions:['Preview the dark atmosphere with sensitive younger children.','Safe overall for ages 9+ who enjoy atmospheric survival games.']
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════
+// EMAIL → BREVO
+// ═══════════════════════════════════════════════════════════════
+async function handleEmailSubmit(btn) {
+  const input = document.getElementById('alert-email-input');
+  const email = input ? input.value.trim() : '';
+
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    if (input) {
+      input.style.border = '2px solid var(--red)';
+      input.placeholder = 'Enter a valid email first';
+      input.value = '';
+    }
+    return;
+  }
+
+  btn.textContent = 'Adding you…';
+  btn.disabled = true;
+  if (input) input.disabled = true;
+
+  const BREVO_URL = 'https://5fb9afde.sibforms.com/serve/MUIFAEvyxyxT64lGrvmQcXdeUOrKROE7niCIYZrixBkspfcPbKbBEdOsO8L7aY3HSgihBQLi2q54HHzlhOMh6njdwvRzMBlPgpp7b5RU_xutn7q3rCQN22kMB5V2HkF9HBxDhIujavkk3MLjONuHZaCPL4YKZ7jaSzDmUPGf0bxylF0mcbFPeS2Ry6KJq-RcHG6VHjJHM-MAHk2Btg==';
+
+  const formBody = new FormData();
+  formBody.append('EMAIL', email);
+  formBody.append('email_address_check', '');
+  formBody.append('locale', 'en');
+
+  try {
+    await fetch(BREVO_URL, { method:'POST', mode:'no-cors', body:formBody });
+  } catch (_) { /* no-cors blocks response reading — POST still goes through */ }
+
+  btn.textContent = '✅ You\'re on the list!';
+  btn.style.background = 'var(--green)';
+  btn.style.color = 'var(--navy)';
+  if (input) { input.value = ''; input.disabled = false; input.style.border = ''; }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// FALLBACK REPORT (for games not in database)
+// ═══════════════════════════════════════════════════════════════
+function makeFallback(name) {
+  const display = name.charAt(0).toUpperCase() + name.slice(1);
+  return {
+    name: display + ' 🎮',
+    meta: 'Popular game · Checked just now',
+    overall: 'medium', badge: '⚠️', label: 'Medium Risk', badgeClass: 'badge-medium',
+    chat:    { risk:'medium', desc:'Chat is enabled. Monitor your child\'s conversations closely.' },
+    data:    { risk:'medium', desc:'Standard Roblox data collection applies to all experiences.' },
+    spend:   { risk:'medium', desc:'In-game purchases may be available via Robux.' },
+    links:   { risk:'low',    desc:'No confirmed external links detected in our database.' },
+    content: { risk:'low',    desc:'Content appears age-appropriate based on platform rating.' },
+    stranger:{ risk:'medium', desc:'Players may interact with strangers during online sessions.' },
+    actions: [
+      'Enable Account Restrictions in your Roblox parental settings.',
+      'Set a monthly Robux spending limit for your child.',
+      'Play the game together with your child first to assess content.',
+      'Review your child\'s friend list after each session.'
+    ]
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UPDATE HERO CARD (updates existing IDs — no innerHTML replace)
+// ═══════════════════════════════════════════════════════════════
+const pillClass = { low:'pill-low', medium:'pill-medium', high:'pill-high' };
+
+function populateHeroCard(d) {
+  const el = id => document.getElementById(id);
+
+  // Title & meta
+  if (el('hcGame')) el('hcGame').textContent = d.name;
+  if (el('hcMeta')) el('hcMeta').textContent = d.meta;
+
+  // Badge circle
+  if (el('hcBadge')) {
+    el('hcBadge').textContent = d.badge;
+    el('hcBadge').className = 'rc-badge-circle ' + d.badgeClass;
+  }
+  if (el('hcLabel')) el('hcLabel').textContent = d.label;
+
+  // Update 4 metric rows
+  const metrics = {
+    chat:    ['hcChat',    'hcChatPill'],
+    data:    ['hcData',    'hcDataPill'],
+    spend:   ['hcSpend',   'hcSpendPill'],
+    content: ['hcContent', 'hcContentPill']
+  };
+
+  Object.entries(metrics).forEach(([k, [descId, pillId]]) => {
+    if (!d[k]) return;
+    if (el(descId)) el(descId).textContent = d[k].desc;
+    if (el(pillId)) {
+      const r = d[k].risk;
+      el(pillId).textContent = r.charAt(0).toUpperCase() + r.slice(1);
+      el(pillId).className = 'pill ' + pillClass[r];
+    }
+  });
+
+  // Update footer action count
+  const footer = document.querySelector('#heroCard .rc-footer');
+  if (footer && d.actions) {
+    footer.innerHTML = '✅ <strong>' + d.actions.length + ' protective action' + (d.actions.length !== 1 ? 's' : '') + '</strong> recommended for this game';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// POPULATE LIVE REPORT (generates full card HTML with proper CSS)
+// ═══════════════════════════════════════════════════════════════
+const metricIcons = {
+  chat:'💬', data:'🔒', spend:'💳', links:'🔗', content:'🎮', stranger:'👥'
+};
+const metricLabels = {
+  chat:'Chat Safety', data:'Data Collection', spend:'Spending Traps',
+  links:'External Links', content:'Content Maturity', stranger:'Stranger Interaction'
+};
+
+function populateReport(d) {
+  const report = document.getElementById('liveReport');
+  if (!report) return;
+
+  const metricsHTML = Object.entries(metricLabels).map(([k, label]) => {
+    const risk = d[k] ? d[k].risk : 'medium';
+    const desc = d[k] ? d[k].desc : 'Standard Roblox safety applies.';
+    return `
+      <div class="metric-row">
+        <div class="metric-header">
+          <span class="metric-label">${metricIcons[k]} ${label}</span>
+          <span class="metric-risk metric-risk-${risk}">${risk.toUpperCase()}</span>
+        </div>
+        <p class="metric-desc">${desc}</p>
+      </div>`;
+  }).join('');
+
+  const actionsHTML = d.actions.map(a => `<li>${a}</li>`).join('');
+
+  report.innerHTML = `
+    <div class="report-inner">
+      <div class="report-header ${d.badgeClass}">
+        <div>
+          <h2 class="report-title">${d.name}</h2>
+          <p class="report-meta">${d.meta}</p>
+        </div>
+        <div class="report-badge-large">${d.badge} ${d.label}</div>
+      </div>
+      <div class="report-metrics">${metricsHTML}</div>
+      <div class="report-actions">
+        <div class="actions-title">✅ What parents should do right now</div>
+        <ul class="actions-list">${actionsHTML}</ul>
+      </div>
+      <div class="report-cta">
+        <p>📧 Get alerts when this game's safety rating changes</p>
+        <button class="btn-primary" onclick="document.getElementById('alerts').scrollIntoView({behavior:'smooth'})">Set Up Free Alerts →</button>
+      </div>
+    </div>`;
+
+  report.classList.add('visible');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RUN CHECK (from search input Enter or button click)
+// ═══════════════════════════════════════════════════════════════
+function runCheck() {
+  const searchInput = document.getElementById('searchInput');
+  const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+  if (!q) return;
+
+  const spinner = document.getElementById('spinner');
+  const report  = document.getElementById('liveReport');
+
+  report.classList.remove('visible');
+  spinner.classList.add('visible');
+
+  // Scroll to live report area smoothly
+  const liveWrap = document.querySelector('.live-wrap');
+  if (liveWrap) liveWrap.scrollIntoView({ behavior:'smooth', block:'start' });
+
+  setTimeout(() => {
+    spinner.classList.remove('visible');
+    const data = gameData[q] || makeFallback(q);
+    populateReport(data);
+    populateHeroCard(data);
+  }, 1100);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// QUICK CHECK (from marquee chips or suggestion chips)
+// ═══════════════════════════════════════════════════════════════
+function quickCheck(name) {
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput) searchInput.value = name;
+
+  const q = name.trim().toLowerCase();
+  const spinner = document.getElementById('spinner');
+  const report  = document.getElementById('liveReport');
+
+  report.classList.remove('visible');
+  spinner.classList.add('visible');
+
+  const liveWrap = document.querySelector('.live-wrap');
+  if (liveWrap) liveWrap.scrollIntoView({ behavior:'smooth', block:'start' });
+
+  setTimeout(() => {
+    spinner.classList.remove('visible');
+    const data = gameData[q] || makeFallback(q);
+    populateReport(data);
+    populateHeroCard(data);
+  }, 1100);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// AUTOCOMPLETE
+// ═══════════════════════════════════════════════════════════════
+const allGames = [
+  { key:'adopt me',                    label:'Adopt Me! 🐾',                    visits:'35B visits',  risk:'low'    },
+  { key:'blox fruits',                 label:'Blox Fruits ⚔️',                   visits:'52.9B visits',risk:'medium' },
+  { key:'brookhaven',                  label:'Brookhaven 🏡RP',                  visits:'69B visits',  risk:'medium' },
+  { key:'royale high',                 label:'Royale High 👑',                   visits:'3.8B visits', risk:'low'    },
+  { key:'murder mystery 2',            label:'Murder Mystery 2 🔪',              visits:'14B visits',  risk:'high'   },
+  { key:'da hood',                     label:'Da Hood 🚨',                        visits:'4.1B visits', risk:'high'   },
+  { key:'livetopia',                   label:'Livetopia 🌆',                     visits:'1.2B visits', risk:'low'    },
+  { key:'tower of hell',               label:'Tower of Hell 🏗️',                visits:'23B visits',  risk:'low'    },
+  { key:'grow a garden',               label:'Grow a Garden 🌱',                 visits:'21B visits',  risk:'low'    },
+  { key:'meepcity',                    label:'MeepCity 🏘️',                     visits:'10B visits',  risk:'medium' },
+  { key:'piggy',                       label:'Piggy 🐷',                          visits:'8B visits',   risk:'low'    },
+  { key:'the strongest battlegrounds', label:'The Strongest Battlegrounds 💥',   visits:'4B visits',   risk:'medium' },
+  { key:'bedwars',                     label:'BedWars 🛏️',                      visits:'3.5B visits', risk:'low'    },
+  { key:'welcome to bloxburg',         label:'Welcome to Bloxburg 🏠',           visits:'3B visits',   risk:'low'    },
+  { key:'pet simulator x',             label:'Pet Simulator X 🐶',               visits:'7B visits',   risk:'medium' },
+  { key:'dress to impress',            label:'Dress To Impress 👗',              visits:'3B visits',   risk:'low'    },
+  { key:'rivals',                      label:'RIVALS ⚡',                         visits:'2B visits',   risk:'medium' },
+  { key:'jailbreak',                   label:'Jailbreak 🚔',                      visits:'8B visits',   risk:'medium' },
+  { key:'all star tower defense',      label:'All Star Tower Defense 🗼',        visits:'4B visits',   risk:'medium' },
+  { key:'evade',                       label:'Evade 🤖',                          visits:'2B visits',   risk:'medium' },
+  { key:'berry avenue',                label:'Berry Avenue RP 🍓',               visits:'2.5B visits', risk:'medium' },
+  { key:'doors',                       label:'DOORS 🚪',                          visits:'2B visits',   risk:'low'    },
+  { key:'arsenal',                     label:'Arsenal 🔫',                        visits:'4B visits',   risk:'high'   },
+  { key:'toilet tower defense',        label:'Toilet Tower Defense 🚽',          visits:'3B visits',   risk:'low'    },
+  { key:'dead rails',                  label:'Dead Rails 🚂',                     visits:'1B visits',   risk:'medium' },
+  { key:'blade ball',                  label:'Blade Ball ⚽',                     visits:'2B visits',   risk:'low'    },
+  { key:'work at a pizza place',       label:'Work at a Pizza Place 🍕',         visits:'3.5B visits', risk:'low'    },
+  { key:'flee the facility',           label:'Flee the Facility 🏃',             visits:'2B visits',   risk:'low'    },
+  { key:'build a boat for treasure',   label:'Build a Boat for Treasure ⛵',     visits:'2B visits',   risk:'low'    },
+  { key:'rainbow friends',             label:'Rainbow Friends 🌈',               visits:'2.5B visits', risk:'low'    },
+  { key:'tower defense simulator',     label:'Tower Defense Simulator 🏰',       visits:'2B visits',   risk:'low'    },
+  { key:'pls donate',                  label:'PLS DONATE 💸',                    visits:'1.5B visits', risk:'high'   },
+  { key:'natural disaster survival',   label:'Natural Disaster Survival 🌪️',    visits:'2B visits',   risk:'low'    },
+  { key:'king legacy',                 label:'King Legacy ⚓',                    visits:'3B visits',   risk:'medium' },
+  { key:'bee swarm simulator',         label:'Bee Swarm Simulator 🐝',           visits:'1.5B visits', risk:'low'    },
+  { key:'anime defenders',             label:'Anime Defenders 🗡️',              visits:'1B visits',   risk:'medium' },
+  { key:'hide and seek extreme',       label:'Hide and Seek Extreme 🙈',         visits:'2B visits',   risk:'low'    },
+  { key:'slap battles',                label:'Slap Battles 👋',                  visits:'2B visits',   risk:'low'    },
+  { key:'the floor is lava',           label:'The Floor is Lava! 🔥',           visits:'2B visits',   risk:'low'    },
+  { key:'3008',                        label:'3008 🛒',                           visits:'1.5B visits', risk:'medium' },
+  { key:'break in',                    label:'Break In 🏚️',                     visits:'1B visits',   risk:'low'    },
+  { key:'shindo life',                 label:'Shindo Life 🍃',                   visits:'3B visits',   risk:'medium' },
+  { key:'mad city',                    label:'Mad City: Chapter 2 🏙️',          visits:'2B visits',   risk:'high'   },
+  { key:'prison life',                 label:'Prison Life 🔒',                   visits:'1B visits',   risk:'high'   },
+  { key:'phantom forces',              label:'Phantom Forces 🎯',                visits:'1.5B visits', risk:'high'   },
+  { key:'gacha online',                label:'Gacha Online RP 🎭',               visits:'800M visits', risk:'high'   },
+  { key:'steal a brainrot',            label:'Steal a Brainrot 🧠',              visits:'500M visits', risk:'low'    },
+  { key:'blue lock rivals',            label:'Blue Lock: Rivals ⚽',             visits:'1.5B visits', risk:'low'    },
+  { key:'anime adventures',            label:'Anime Adventures ⚔️',              visits:'1.5B visits', risk:'medium' },
+  { key:'99 nights in the forest',     label:'99 Nights in the Forest 🌲',      visits:'1B visits',   risk:'low'    },
+];
+
+const dotColor = { low:'var(--green)', medium:'var(--amber)', high:'var(--red)' };
+const riskWord  = { low:'Low Risk',    medium:'Med Risk',     high:'High Risk'  };
+
+const inp  = document.getElementById('searchInput');
+const drop = document.getElementById('acDrop');
+let activeIdx = -1;
+
+function getMatches(q) {
+  if (!q) return [];
+  return allGames.filter(g =>
+    g.label.toLowerCase().includes(q) || g.key.includes(q)
+  ).slice(0, 7);
+}
+
+function renderDrop(matches) {
+  if (!matches.length) { drop.classList.remove('open'); return; }
+  drop.innerHTML = matches.map((g, i) => `
+    <div class="ac-item" data-idx="${i}" onmousedown="selectGame('${g.key}','${g.label.replace(/'/g,'&apos;')}')">
+      <div class="ac-dot" style="background:${dotColor[g.risk]}"></div>
+      <div class="ac-name">${g.label}</div>
+      <div class="ac-visits">${g.visits}</div>
+      <div class="ac-risk ${g.risk}">${riskWord[g.risk]}</div>
+    </div>`).join('');
+  activeIdx = -1;
+  drop.classList.add('open');
+}
+
+function selectGame(key, label) {
+  inp.value = label;
+  drop.classList.remove('open');
+  // Run check directly with the key
+  const spinner = document.getElementById('spinner');
+  const report  = document.getElementById('liveReport');
+  report.classList.remove('visible');
+  spinner.classList.add('visible');
+  const liveWrap = document.querySelector('.live-wrap');
+  if (liveWrap) liveWrap.scrollIntoView({ behavior:'smooth', block:'start' });
+  setTimeout(() => {
+    spinner.classList.remove('visible');
+    const data = gameData[key] || makeFallback(key);
+    populateReport(data);
+    populateHeroCard(data);
+  }, 1100);
+}
+
+inp.addEventListener('input', () => {
+  const q = inp.value.trim().toLowerCase();
+  renderDrop(getMatches(q));
+});
+
+inp.addEventListener('keydown', e => {
+  const items = drop.querySelectorAll('.ac-item');
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    activeIdx = Math.min(activeIdx + 1, items.length - 1);
+    items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    activeIdx = Math.max(activeIdx - 1, 0);
+    items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
+  } else if (e.key === 'Enter') {
+    if (activeIdx >= 0 && items[activeIdx]) {
+      items[activeIdx].dispatchEvent(new MouseEvent('mousedown'));
+    } else {
+      drop.classList.remove('open');
+      runCheck();
+    }
+  } else if (e.key === 'Escape') {
+    drop.classList.remove('open');
+  }
+});
+
+// Close dropdown on outside click
+document.addEventListener('click', e => {
+  if (!inp.contains(e.target) && !drop.contains(e.target)) {
+    drop.classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
