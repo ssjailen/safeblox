@@ -2244,26 +2244,32 @@ async function submitFeedback() {
 
   const type  = document.getElementById('fbType').value;
   const name  = document.getElementById('fbName').value.trim() || 'Anonymous';
-  const email = document.getElementById('fbEmail').value.trim() || 'noreply@safeblox.app';
+  const email = document.getElementById('fbEmail').value.trim() || 'no-reply@safeblox.app';
 
-  // Build Brevo form body
-  const params = new URLSearchParams();
-  params.append('EMAIL', email);
-  params.append('FIRSTNAME', name);
-  params.append('OPT_IN', '1');
-  // Append feedback as a custom attribute via the message field
-  params.append('FEEDBACK_TYPE', type);
-  params.append('MESSAGE', msg);
+  const typeLabels = {
+    suggestion: 'Suggest a game',
+    correction: 'Incorrect rating report',
+    feature: 'Feature request',
+    bug: 'Bug report',
+    other: 'General feedback'
+  };
 
   try {
-    // Send via Brevo transactional or fallback to mailto
-    await fetch('https://5fb9afde.sibforms.com/serve/MUIFAEvyxyxT64lGrvmQcXdeUOrKROE7niCIYZrixBkspfcPbKbBEdOsO8L7aY3HSgihBQLi2q54HHzlhOMh6njdwvRzMBlPgpp7b5RU_xutn7q3rCQN22kMB5V2HkF9HBxDhIujavkk3MLjONuHZaCPL4YKZ7jaSzDmUPGf0bxylF0mcbFPeS2Ry6KJq-RcHG6VHjJHM-MAHk2Btg==', {
+    const res = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString()
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: 'e1977f0d-d31e-4b3d-bf49-4f87d0b2fdcf',
+        subject: `SafeBlox Feedback: ${typeLabels[type] || type}`,
+        from_name: name,
+        email: email,
+        message: msg,
+        feedback_type: typeLabels[type] || type,
+      })
     });
-  } catch(e) { /* no-cors swallows errors — treat as success */ }
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+  } catch(e) { /* still show success to user */ }
 
   document.getElementById('feedbackForm').style.display = 'none';
   document.getElementById('feedbackSuccess').style.display = 'block';
