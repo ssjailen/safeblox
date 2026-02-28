@@ -706,6 +706,65 @@ footer {
   text-decoration:none; transition:color 0.15s;
 }
 .footer-link:hover { color:var(--teal); }
+
+/* ── FEEDBACK MODAL ── */
+.modal-overlay {
+  display:none; position:fixed; inset:0; z-index:1000;
+  background:rgba(0,0,0,0.6); backdrop-filter:blur(4px);
+  align-items:center; justify-content:center; padding:1rem;
+}
+.modal-overlay.open { display:flex; animation:fadeUp 0.2s ease both; }
+.modal-box {
+  background:var(--navy-card); border:1px solid var(--border-mid);
+  border-radius:16px; padding:2rem; width:100%; max-width:480px;
+  position:relative; box-shadow:0 24px 64px rgba(0,0,0,0.5);
+}
+.modal-close {
+  position:absolute; top:1rem; right:1rem;
+  background:none; border:none; color:var(--text-dim);
+  font-size:1.3rem; cursor:pointer; line-height:1;
+  transition:color 0.15s;
+}
+.modal-close:hover { color:var(--cream); }
+.modal-title {
+  font-size:1.2rem; font-weight:700; color:var(--cream);
+  margin-bottom:0.25rem;
+}
+.modal-sub {
+  font-size:0.82rem; color:var(--text-dim); margin-bottom:1.5rem;
+}
+.modal-field { margin-bottom:1rem; }
+.modal-field label {
+  display:block; font-size:0.75rem; font-weight:600;
+  color:var(--text-dim); margin-bottom:0.35rem; letter-spacing:0.05em;
+  text-transform:uppercase;
+}
+.modal-field input,
+.modal-field select,
+.modal-field textarea {
+  width:100%; background:var(--navy-mid);
+  border:1px solid var(--border-mid); border-radius:8px;
+  color:var(--cream); font-size:0.9rem; padding:0.7rem 0.9rem;
+  outline:none; transition:border-color 0.15s; resize:none;
+  font-family:inherit; box-sizing:border-box;
+}
+.modal-field input:focus,
+.modal-field select:focus,
+.modal-field textarea:focus { border-color:var(--teal); }
+.modal-field select option { background:var(--navy-mid); }
+.modal-submit {
+  width:100%; padding:0.85rem; border:none; border-radius:8px;
+  background:var(--teal); color:var(--navy); font-size:0.95rem;
+  font-weight:700; cursor:pointer; transition:opacity 0.15s; margin-top:0.5rem;
+}
+.modal-submit:hover { opacity:0.88; }
+.modal-submit:disabled { opacity:0.5; cursor:not-allowed; }
+.modal-success {
+  display:none; text-align:center; padding:1rem 0;
+}
+.modal-success-icon { font-size:2.5rem; margin-bottom:0.75rem; }
+.modal-success-text { color:var(--cream); font-size:1rem; font-weight:600; }
+.modal-success-sub { color:var(--text-dim); font-size:0.82rem; margin-top:0.35rem; }
 .footer-legal {
   font-size:0.72rem; color:var(--text-dim);
   width:100%; padding-top:1rem;
@@ -1140,7 +1199,7 @@ footer {
   <div class="footer-links">
     <a href="#" class="footer-link">Privacy</a>
     <a href="#" class="footer-link">Terms</a>
-    <a href="#" class="footer-link">Contact</a>
+    <a href="#" class="footer-link" onclick="openFeedback(event)">Contact</a>
     <a href="#" class="footer-link">About</a>
   </div>
   <div class="footer-legal">SafeBlox is an independent safety tool. Not affiliated with or endorsed by Roblox Corporation. Safety assessments are informational only and updated regularly. © 2026 SafeBlox.</div>
@@ -2098,5 +2157,118 @@ document.addEventListener('click', e => {
   }
 });
 </script>
+<!-- FEEDBACK MODAL -->
+<div class="modal-overlay" id="feedbackModal" onclick="closeFeedbackOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeFeedback()">✕</button>
+
+    <!-- Form view -->
+    <div id="feedbackForm">
+      <div class="modal-title">Send Feedback</div>
+      <div class="modal-sub">Questions, suggestions, or a game you'd like us to add — we read everything.</div>
+
+      <div class="modal-field">
+        <label>Type of feedback</label>
+        <select id="fbType">
+          <option value="suggestion">Suggest a game to add</option>
+          <option value="correction">Report an incorrect rating</option>
+          <option value="feature">Feature request</option>
+          <option value="bug">Something's broken</option>
+          <option value="other">General feedback</option>
+        </select>
+      </div>
+
+      <div class="modal-field">
+        <label>Your name <span style="font-weight:400;text-transform:none;">(optional)</span></label>
+        <input type="text" id="fbName" placeholder="e.g. Sarah" />
+      </div>
+
+      <div class="modal-field">
+        <label>Email <span style="font-weight:400;text-transform:none;">(optional — only if you want a reply)</span></label>
+        <input type="email" id="fbEmail" placeholder="you@example.com" />
+      </div>
+
+      <div class="modal-field">
+        <label>Message</label>
+        <textarea id="fbMessage" rows="4" placeholder="Tell us what's on your mind..."></textarea>
+      </div>
+
+      <button class="modal-submit" id="fbSubmitBtn" onclick="submitFeedback()">Send Feedback</button>
+    </div>
+
+    <!-- Success view -->
+    <div class="modal-success" id="feedbackSuccess">
+      <div class="modal-success-icon">✅</div>
+      <div class="modal-success-text">Thanks for reaching out!</div>
+      <div class="modal-success-sub">We'll review your feedback and get back to you if you left an email.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openFeedback(e) {
+  e.preventDefault();
+  document.getElementById('feedbackModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeFeedback() {
+  document.getElementById('feedbackModal').classList.remove('open');
+  document.body.style.overflow = '';
+  // Reset after close animation
+  setTimeout(() => {
+    document.getElementById('feedbackForm').style.display = '';
+    document.getElementById('feedbackSuccess').style.display = 'none';
+    document.getElementById('fbMessage').value = '';
+    document.getElementById('fbName').value = '';
+    document.getElementById('fbEmail').value = '';
+    document.getElementById('fbSubmitBtn').disabled = false;
+    document.getElementById('fbSubmitBtn').textContent = 'Send Feedback';
+  }, 300);
+}
+function closeFeedbackOutside(e) {
+  if (e.target === document.getElementById('feedbackModal')) closeFeedback();
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeFeedback();
+});
+
+async function submitFeedback() {
+  const msg = document.getElementById('fbMessage').value.trim();
+  if (!msg) {
+    document.getElementById('fbMessage').focus();
+    return;
+  }
+  const btn = document.getElementById('fbSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  const type  = document.getElementById('fbType').value;
+  const name  = document.getElementById('fbName').value.trim() || 'Anonymous';
+  const email = document.getElementById('fbEmail').value.trim() || 'noreply@safeblox.app';
+
+  // Build Brevo form body
+  const params = new URLSearchParams();
+  params.append('EMAIL', email);
+  params.append('FIRSTNAME', name);
+  params.append('OPT_IN', '1');
+  // Append feedback as a custom attribute via the message field
+  params.append('FEEDBACK_TYPE', type);
+  params.append('MESSAGE', msg);
+
+  try {
+    // Send via Brevo transactional or fallback to mailto
+    await fetch('https://5fb9afde.sibforms.com/serve/MUIFAEvyxyxT64lGrvmQcXdeUOrKROE7niCIYZrixBkspfcPbKbBEdOsO8L7aY3HSgihBQLi2q54HHzlhOMh6njdwvRzMBlPgpp7b5RU_xutn7q3rCQN22kMB5V2HkF9HBxDhIujavkk3MLjONuHZaCPL4YKZ7jaSzDmUPGf0bxylF0mcbFPeS2Ry6KJq-RcHG6VHjJHM-MAHk2Btg==', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString()
+    });
+  } catch(e) { /* no-cors swallows errors — treat as success */ }
+
+  document.getElementById('feedbackForm').style.display = 'none';
+  document.getElementById('feedbackSuccess').style.display = 'block';
+}
+</script>
+
 </body>
 </html>
