@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How We Rate Games — SafeBlox</title>
+  <meta name="description" content="Learn how SafeBlox evaluates Roblox games across 6 safety dimensions to help parents make informed decisions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    :root {
+      --navy:       #0d1b2a;
+      --navy-mid:   #1a2f45;
+      --navy-card:  #132030;
+      --teal:       #00c9a7;
+      --teal-dim:   #00a88c;
+      --amber:      #ffb347;
+      --red:        #ff6b6b;
+      --green:      #4ecb71;
+      --cream:      #f5f0e8;
+      --text:       #e8e0d5;
+      --text-dim:   #8a9bb0;
+      --border:     rgba(0,201,167,0.12);
+      --border-mid: rgba(255,255,255,0.08);
+      --red-bg:     rgba(255,107,107,0.12);
+      --amber-bg:   rgba(255,179,71,0.12);
+      --green-bg:   rgba(78,203,113,0.12);
+      --red-border:   rgba(255,107,107,0.3);
+      --amber-border: rgba(255,179,71,0.3);
+      --green-border: rgba(78,203,113,0.3);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position:sticky; top:0; z-index:100;
+      background:rgba(13,27,42,0.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--border-mid);
+      padding:0 2rem;
+      display:flex; align-items:center; justify-content:space-between;
+      height:64px;
+    }
+    .nav-logo {
+      font-family:'Fraunces',serif;
+      font-size:1.1rem; color:var(--cream);
+      text-decoration:none;
+    }
+    .nav-logo span { color:var(--teal); }
+    .nav-cta {
+      background:var(--teal); color:var(--navy);
+      padding:0.5rem 1.2rem; border-radius:8px;
+      font-size:0.85rem; font-weight:700;
+      text-decoration:none; transition:opacity 0.15s;
+    }
+    .nav-cta:hover { opacity:0.88; }
+
+    /* HERO */
+    .hero {
+      max-width:760px; margin:0 auto;
+      padding:5rem 2rem 2rem;
+      text-align:center;
+    }
+    .hero-eyebrow {
+      display:inline-block;
+      font-size:0.75rem; font-weight:700; letter-spacing:0.1em;
+      text-transform:uppercase; color:var(--teal);
+      background:rgba(0,201,167,0.1);
+      border:1px solid rgba(0,201,167,0.2);
+      border-radius:20px; padding:0.3rem 0.9rem;
+      margin-bottom:1.5rem;
+    }
+    .hero h1 {
+      font-family:'Fraunces',serif;
+      font-size:clamp(2rem,5vw,3.2rem);
+      color:var(--cream); line-height:1.15;
+      margin-bottom:1rem;
+    }
+    .hero h1 em { font-style:italic; color:var(--teal); }
+    .hero p {
+      font-size:1.05rem; color:var(--text-dim);
+      max-width:560px; margin:0 auto 2rem;
+    }
+
+    /* CONTENT */
+    .content {
+      max-width:760px; margin:0 auto;
+      padding:1rem 2rem 5rem;
+    }
+
+    /* SECTION HEADERS */
+    .section-title {
+      font-family:'Fraunces',serif;
+      font-size:1.5rem; color:var(--cream);
+      margin:3rem 0 1rem;
+      padding-bottom:0.75rem;
+      border-bottom:1px solid var(--border-mid);
+    }
+    .section-intro {
+      color:var(--text-dim); font-size:0.95rem;
+      margin-bottom:1.5rem;
+    }
+
+    /* DIMENSION CARDS */
+    .dimension-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1rem;
+      margin-bottom:1.5rem;
+    }
+    @media(max-width:600px) { .dimension-grid { grid-template-columns:1fr; } }
+
+    .dimension-card {
+      background:var(--navy-card);
+      border:1px solid var(--border-mid);
+      border-radius:12px; padding:1.25rem;
+    }
+    .dimension-card:hover { border-color:var(--teal); transition:border-color 0.2s; }
+    .dim-header {
+      display:flex; align-items:center; gap:0.6rem;
+      margin-bottom:0.6rem;
+    }
+    .dim-icon { font-size:1.3rem; }
+    .dim-name {
+      font-weight:700; color:var(--cream);
+      font-size:0.95rem;
+    }
+    .dim-desc {
+      font-size:0.83rem; color:var(--text-dim);
+      line-height:1.6;
+    }
+
+    /* RISK SCORE */
+    .score-grid {
+      display:grid; grid-template-columns:1fr 1fr 1fr;
+      gap:1rem; margin:1.5rem 0;
+    }
+    @media(max-width:500px) { .score-grid { grid-template-columns:1fr; } }
+
+    .score-card {
+      border-radius:12px; padding:1.1rem 1.25rem;
+      display:flex; flex-direction:column; gap:0.35rem;
+    }
+    .score-card.low  { background:var(--green-bg);  border:1px solid var(--green-border); }
+    .score-card.med  { background:var(--amber-bg);  border:1px solid var(--amber-border); }
+    .score-card.high { background:var(--red-bg);    border:1px solid var(--red-border);   }
+
+    .score-label {
+      font-size:1.1rem; font-weight:700;
+    }
+    .score-card.low  .score-label { color:var(--green); }
+    .score-card.med  .score-label { color:var(--amber); }
+    .score-card.high .score-label { color:var(--red);   }
+    .score-desc { font-size:0.82rem; color:var(--text-dim); }
+
+    /* SOURCES */
+    .sources-list {
+      list-style:none; padding:0;
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:0.6rem; margin:1rem 0;
+    }
+    @media(max-width:500px) { .sources-list { grid-template-columns:1fr; } }
+    .sources-list li {
+      background:var(--navy-card);
+      border:1px solid var(--border-mid);
+      border-radius:8px; padding:0.65rem 0.9rem;
+      font-size:0.83rem; color:var(--text-dim);
+      display:flex; align-items:center; gap:0.5rem;
+    }
+    .sources-list li::before {
+      content:'→'; color:var(--teal); font-weight:700;
+    }
+
+    /* INDEPENDENCE BOX */
+    .independence-box {
+      background:rgba(0,201,167,0.06);
+      border:1px solid rgba(0,201,167,0.2);
+      border-radius:12px; padding:1.5rem;
+      margin:2rem 0;
+    }
+    .independence-box p {
+      font-size:0.88rem; color:var(--text-dim);
+      line-height:1.7;
+    }
+    .independence-box strong { color:var(--cream); }
+
+    /* PROCESS STEPS */
+    .process-steps {
+      counter-reset: steps;
+      list-style:none; padding:0;
+      display:flex; flex-direction:column; gap:1rem;
+      margin:1rem 0 1.5rem;
+    }
+    .process-steps li {
+      counter-increment: steps;
+      background:var(--navy-card);
+      border:1px solid var(--border-mid);
+      border-radius:10px; padding:1rem 1.25rem;
+      display:flex; align-items:flex-start; gap:1rem;
+      font-size:0.88rem; color:var(--text-dim);
+    }
+    .process-steps li::before {
+      content: counter(steps);
+      background:var(--teal); color:var(--navy);
+      font-weight:700; font-size:0.78rem;
+      min-width:1.6rem; height:1.6rem;
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; margin-top:0.05rem;
+    }
+    .step-title { color:var(--cream); font-weight:600; margin-bottom:0.2rem; }
+
+    /* CTA */
+    .cta-bar {
+      text-align:center;
+      background:var(--navy-card);
+      border:1px solid var(--border-mid);
+      border-radius:16px; padding:2.5rem 2rem;
+      margin-top:3rem;
+    }
+    .cta-bar h3 {
+      font-family:'Fraunces',serif;
+      font-size:1.4rem; color:var(--cream);
+      margin-bottom:0.5rem;
+    }
+    .cta-bar p { color:var(--text-dim); font-size:0.9rem; margin-bottom:1.5rem; }
+    .cta-btn {
+      display:inline-block;
+      background:var(--teal); color:var(--navy);
+      padding:0.8rem 2rem; border-radius:8px;
+      font-weight:700; font-size:0.95rem;
+      text-decoration:none; transition:opacity 0.15s;
+    }
+    .cta-btn:hover { opacity:0.88; }
+
+    /* FOOTER */
+    footer {
+      background:var(--navy-mid);
+      border-top:1px solid var(--border-mid);
+      padding:2rem;
+      display:flex; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
+      gap:1rem;
+    }
+    .footer-logo {
+      font-family:'Fraunces',serif;
+      font-size:1.1rem; color:var(--cream);
+    }
+    .footer-links { display:flex; gap:1.5rem; flex-wrap:wrap; }
+    .footer-link {
+      font-size:0.78rem; color:var(--text-dim);
+      text-decoration:none; transition:color 0.15s;
+    }
+    .footer-link:hover { color:var(--teal); }
+    .footer-legal {
+      font-size:0.72rem; color:var(--text-dim);
+      width:100%; padding-top:1rem;
+      border-top:1px solid var(--border-mid);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Safe<span>Blox</span></a>
+  <a href="/" class="nav-cta">Check a game →</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Transparency</div>
+  <h1>How We Rate <em>Games</em></h1>
+  <p>Every SafeBlox rating is built on structured research, not guesswork. Here's exactly how we evaluate each game — and why you can trust the results.</p>
+</div>
+
+<div class="content">
+
+  <!-- THE 6 DIMENSIONS -->
+  <h2 class="section-title">The 6 Safety Dimensions</h2>
+  <p class="section-intro">Every game is scored across six dimensions. Each is rated Low, Medium, or High risk based on documented evidence — not opinion.</p>
+
+  <div class="dimension-grid">
+    <div class="dimension-card">
+      <div class="dim-header">
+        <span class="dim-icon">💬</span>
+        <span class="dim-name">Chat Safety</span>
+      </div>
+      <p class="dim-desc">Evaluates open text chat, voice chat, and proximity chat with strangers. Considers whether chat is moderated, filterable, or disabled by default.</p>
+    </div>
+    <div class="dimension-card">
+      <div class="dim-header">
+        <span class="dim-icon">👤</span>
+        <span class="dim-name">Stranger Danger</span>
+      </div>
+      <p class="dim-desc">Assesses how easily an unknown adult could initiate prolonged private interaction with a child — including server size, DM mechanics, and friend requests.</p>
+    </div>
+    <div class="dimension-card">
+      <div class="dim-header">
+        <span class="dim-icon">🎮</span>
+        <span class="dim-name">Content Maturity</span>
+      </div>
+      <p class="dim-desc">Reviews in-game themes, imagery, and roleplay. Considers Roblox's own age rating alongside community-reported content and observed gameplay.</p>
+    </div>
+    <div class="dimension-card">
+      <div class="dim-header">
+        <span class="dim-icon">🔒</span>
+        <span class="dim-name">Data Collection</span>
+      </div>
+      <p class="dim-desc">Reviews each developer's data practices, third-party analytics integrations, and behavioral tracking beyond Roblox's platform baseline.</p>
+    </div>
+    <div class="dimension-card">
+      <div class="dim-header">
+        <span class="dim-icon">💸</span>
+        <span class="dim-name">Spending Pressure</span>
+      </div>
+      <p class="dim-desc">Evaluates in-game monetization — whether Robux is required to progress, loot boxes are used, and how aggressively purchases are promoted to players.</p>
+    </div>
+    <div class="dimension-card">
+      <div class="dim-header">
+        <span class="dim-icon">🛡️</span>
+        <span class="dim-name">Parental Control Effectiveness</span>
+      </div>
+      <p class="dim-desc">Assesses how much Roblox's built-in parental controls actually reduce the game's risks — and flags games where platform controls fall short.</p>
+    </div>
+  </div>
+
+  <!-- OUR PROCESS -->
+  <h2 class="section-title">Our Research Process</h2>
+  <p class="section-intro">Each game goes through the same structured process before receiving a rating.</p>
+
+  <ol class="process-steps">
+    <li>
+      <div>
+        <div class="step-title">Direct gameplay observation</div>
+        Each rated game is played or observed firsthand to capture real in-game behavior, not just what developers claim.
+      </div>
+    </li>
+    <li>
+      <div>
+        <div class="step-title">Platform documentation review</div>
+        We review Roblox's official age ratings, developer disclosures, and Terms of Service for each game.
+      </div>
+    </li>
+    <li>
+      <div>
+        <div class="step-title">Privacy policy analysis</div>
+        Developer and platform privacy documentation is reviewed for data collection practices and third-party sharing.
+      </div>
+    </li>
+    <li>
+      <div>
+        <div class="step-title">Cross-reference with trusted sources</div>
+        Ratings are cross-checked against Common Sense Media, parent community reports, and educator feedback.
+      </div>
+    </li>
+    <li>
+      <div>
+        <div class="step-title">News & legal review</div>
+        We monitor AG lawsuits, COPPA enforcement actions, and cybersecurity research that may affect a game's risk profile.
+      </div>
+    </li>
+    <li>
+      <div>
+        <div class="step-title">Ongoing review</div>
+        Games are revisited regularly — Roblox experiences update frequently and risks can change quickly.
+      </div>
+    </li>
+  </ol>
+
+  <!-- SOURCES -->
+  <h2 class="section-title">Our Sources</h2>
+  <ul class="sources-list">
+    <li>Roblox platform data & official age ratings</li>
+    <li>Developer privacy policies</li>
+    <li>Direct gameplay observation</li>
+    <li>Common Sense Media</li>
+    <li>Parent forums & community reports</li>
+    <li>Educator feedback</li>
+    <li>AG lawsuits & COPPA filings</li>
+    <li>Cybersecurity research</li>
+  </ul>
+
+  <!-- OVERALL SCORE -->
+  <h2 class="section-title">Overall Risk Score</h2>
+  <p class="section-intro">Each dimension is weighted equally. A game's overall score is determined by the spread of dimension ratings — with content maturity treated as a potential override.</p>
+
+  <div class="score-grid">
+    <div class="score-card low">
+      <span class="score-label">✅ Low Risk</span>
+      <span class="score-desc">Majority of dimensions score Low. Suitable for most ages with basic parental settings.</span>
+    </div>
+    <div class="score-card med">
+      <span class="score-label">⚠️ Medium Risk</span>
+      <span class="score-desc">Mixed scores. Parental guidance recommended — review specific areas of concern.</span>
+    </div>
+    <div class="score-card high">
+      <span class="score-label">🔴 High Risk</span>
+      <span class="score-desc">One or more dimensions score High, or content maturity is severe. Not recommended for young children.</span>
+    </div>
+  </div>
+
+  <!-- INDEPENDENCE -->
+  <div class="independence-box">
+    <h3 style="color:var(--teal);font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Independence & Limitations</h3>
+    <p><strong>SafeBlox is independently operated and receives no payment from Roblox, any game developer, or any third party.</strong> Ratings reflect conditions at the time of last review — Roblox games update frequently and risks can change. We encourage parents to use SafeBlox as a starting point, not a final verdict. When in doubt, play the game yourself.</p>
+    <p style="margin-top:0.75rem;">SafeBlox is not affiliated with or endorsed by Roblox Corporation. Safety assessments are informational only.</p>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-bar">
+    <h3>Ready to check a game?</h3>
+    <p>Instant safety reports for 50+ of the most popular Roblox games. Free, no signup required.</p>
+    <a href="/" class="cta-btn">Check a game →</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">SafeBlox</div>
+  <div class="footer-links">
+    <a href="#" class="footer-link">Privacy</a>
+    <a href="#" class="footer-link">Terms</a>
+    <a href="/methodology.html" class="footer-link">Methodology</a>
+    <a href="#" class="footer-link">About</a>
+  </div>
+  <div class="footer-legal">SafeBlox is an independent safety tool. Not affiliated with or endorsed by Roblox Corporation. Safety assessments are informational only and updated regularly. © 2026 SafeBlox.</div>
+</footer>
+
+</body>
+</html>
