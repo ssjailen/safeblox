@@ -1032,7 +1032,7 @@ footer {
 
 <!-- GAME MARQUEE -->
 <div class="games-section">
-  <div class="games-label">50 popular games checked — click any to see report</div>
+  <div class="games-label">100 popular games checked — click any to see report</div>
   <div class="marquee-track">
     <div class="game-card-chip" onclick="quickCheck('adopt me')"><div class="chip-risk-dot dot-low"></div>Adopt Me! 🐾</div>
     <div class="game-card-chip" onclick="quickCheck('blox fruits')"><div class="chip-risk-dot dot-medium"></div>Blox Fruits ⚔️</div>
@@ -1209,7 +1209,7 @@ footer {
 
 <script>
 // ═══════════════════════════════════════════════════════════════
-// GAME DATABASE — 50 games, 6 metrics each
+// GAME DATABASE — 100 games, 6 metrics each
 // ═══════════════════════════════════════════════════════════════
 const gameData = {
   // 1. BROOKHAVEN RP
@@ -1812,6 +1812,656 @@ const gameData = {
     stranger:{risk:'low',desc:'Mostly solo or small-group format. Low stranger interaction.'},
     actions:['Preview the dark atmosphere with sensitive younger children.','Safe overall for ages 9+ who enjoy atmospheric survival games.']
   },
+
+  // 51. FISCH
+  'fisch': {
+    name:'Fisch 🎣', meta:'3B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Relaxed fishing community. Minimal harmful social interaction.'},
+    data:{risk:'low',desc:'Standard Roblox data only. No unusual third-party tracking detected.'},
+    spend:{risk:'medium',desc:'Rod upgrades and cosmetic bait available via Robux. Moderate collecting loop.'},
+    links:{risk:'low',desc:'No external links inside the experience.'},
+    content:{risk:'low',desc:'Fishing exploration game. Entirely calm and age-appropriate.'},
+    stranger:{risk:'low',desc:'Low social pressure environment. Safe for all ages.'},
+    actions:['One of Roblox\'s breakout 2024 hits — very safe for all ages.','Set a small Robux budget for cosmetic upgrades if desired.']
+  },
+
+  // 52. PET SIMULATOR 99
+  'pet simulator 99': {
+    name:'Pet Simulator 99 🐾', meta:'7.5B visits · All Ages · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'low',desc:'Chat present but gameplay is solo-oriented. Minimal social pressure.'},
+    data:{risk:'medium',desc:'Progression and behavioral data tracked. Standard for BIG Games titles.'},
+    spend:{risk:'high',desc:'Extremely aggressive Robux monetization. Exclusive eggs, boosts and lucky blocks create constant spending pressure.'},
+    links:{risk:'low',desc:'No external links inside the experience.'},
+    content:{risk:'low',desc:'Colorful pet collecting game. Fully family-friendly content.'},
+    stranger:{risk:'low',desc:'Mostly solo play. Low stranger risk.'},
+    actions:['Set a strict Robux limit before play — one of Roblox\'s most monetized titles.','Explain that rare pets require significant real money. Kids may not grasp the cost.','Safe content-wise, but the spending loop is the primary risk for families.']
+  },
+
+  // 53. SOL\'S RNG
+  "sol's rng": {
+    name:"Sol's RNG 🎲", meta:'2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Minimal social interaction. Solo rolling mechanic drives gameplay.'},
+    data:{risk:'low',desc:'Standard Roblox data only.'},
+    spend:{risk:'low',desc:'No significant Robux monetization. Low spending pressure.'},
+    links:{risk:'low',desc:'No external links detected inside the experience.'},
+    content:{risk:'low',desc:'Luck-based aura rolling game. Completely harmless content.'},
+    stranger:{risk:'low',desc:'Solo gameplay loop minimizes stranger contact entirely.'},
+    actions:['Very safe for all ages — one of Roblox\'s most benign popular games.','Be aware of the addictive loop of "just one more roll" — set time limits.']
+  },
+
+  // 54. PROJECT SLAYERS
+  'project slayers': {
+    name:'Project Slayers ⚔️', meta:'3.5B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Open RPG world with active combat community. Some toxic PvP behavior.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Breathing styles, race rerolls and boosts drive consistent Robux spending.'},
+    links:{risk:'high',desc:'Active Discord community linked externally for codes and trading.'},
+    content:{risk:'low',desc:'Demon Slayer anime-inspired RPG. Cartoon combat. Age-appropriate for 9+.'},
+    stranger:{risk:'medium',desc:'Open world with PvP zones increases stranger interaction.'},
+    actions:['Set a strict Robux limit — rerolls and boosts are ongoing costs.','Block external Discord links to prevent unsupervised community access.','Review Account Restrictions to limit chat exposure in PvP zones.']
+  },
+
+  // 55. GRAND PIECE ONLINE
+  'grand piece online': {
+    name:'Grand Piece Online 🏴‍☠️', meta:'2B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Open-world RPG with competitive PvP. Chat can be aggressive during raids.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Devil fruits, stat resets and game passes create significant spending pressure.'},
+    links:{risk:'high',desc:'Very active Discord for trading and fruit hunting. Linked externally.'},
+    content:{risk:'low',desc:'One Piece-inspired pirate adventure. Anime combat. Age-appropriate.'},
+    stranger:{risk:'medium',desc:'Large open world with PvP. Moderate stranger exposure during sailing.'},
+    actions:['Set a strict Robux limit — devil fruit hunting can become expensive.','Block Discord links to manage unsupervised community access.','Review PvP settings and discuss online sportsmanship with your child.']
+  },
+
+  // 56. YOUR BIZARRE ADVENTURE
+  'your bizarre adventure': {
+    name:'Your Bizarre Adventure 🌀', meta:'1.5B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Competitive PvP community. Some toxic behavior in public servers.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Stand arrows, storage and spec unlocks require significant Robux.'},
+    links:{risk:'high',desc:'Large Discord server actively linked inside game for stand trading.'},
+    content:{risk:'low',desc:'JoJo\'s Bizarre Adventure-inspired. Cartoon action. Age-appropriate themes.'},
+    stranger:{risk:'medium',desc:'Open PvP increases stranger contact. Mixed ages in servers.'},
+    actions:['Set a strict Robux limit — stand rerolls and unlocks add up quickly.','Block external Discord links.','Discuss online PvP behavior expectations with your child.']
+  },
+
+  // 57. A UNIVERSAL TIME
+  'a universal time': {
+    name:'A Universal Time ⌚', meta:'1B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Competitive PvP fighting game. Community can be aggressive.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Some cosmetics and passes available. Moderate spending pressure.'},
+    links:{risk:'high',desc:'Active Discord community linked externally for meta guides and trades.'},
+    content:{risk:'low',desc:'JoJo/anime crossover fighter. Cartoon-style action.'},
+    stranger:{risk:'medium',desc:'Open PvP matchmaking increases stranger contact.'},
+    actions:['Block external Discord links.','Review PvP game expectations and good sportsmanship.','Moderate risk overall — safe for ages 9+ with chat restrictions enabled.']
+  },
+
+  // 58. PEROXIDE
+  'peroxide': {
+    name:'Peroxide ⚡', meta:'1.5B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Open RPG world with active faction PvP. Some toxicity in competitive zones.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Race/clan rerolls and boost passes drive ongoing Robux spending.'},
+    links:{risk:'high',desc:'Active Discord community linked for codes, clan recruitment and trading.'},
+    content:{risk:'low',desc:'Bleach-inspired soul reaper RPG. Anime combat. Age-appropriate.'},
+    stranger:{risk:'medium',desc:'Faction-based open world increases stranger encounters.'},
+    actions:['Set a strict Robux limit — race rerolls can become addictive.','Block external Discord links.','Enable Account Restrictions to manage chat in PvP zones.']
+  },
+
+  // 59. THE MIMIC
+  'the mimic': {
+    name:'The Mimic 👹', meta:'1B visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'medium',desc:'Cooperative horror. Chat used for team coordination during intense sequences.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Low spending pressure.'},
+    links:{risk:'low',desc:'No significant external links inside the experience.'},
+    content:{risk:'high',desc:'Japanese folklore-inspired horror. Extremely intense jump scares, disturbing imagery, and psychological horror. Officially 13+.'},
+    stranger:{risk:'medium',desc:'Small cooperative group format limits stranger risk.'},
+    actions:['Rated 13+ — not appropriate for young or sensitive children.','Preview the content yourself first — horror intensity is significantly above average Roblox games.','If allowed, play cooperative sessions with your child present.','Disable chat notifications after sessions to prevent lingering contact.']
+  },
+
+  // 60. APEIROPHOBIA
+  'apeirophobia': {
+    name:'Apeirophobia 😨', meta:'800M visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'medium',desc:'Cooperative horror. Chat focused on team escape coordination.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization.'},
+    links:{risk:'low',desc:'No significant external links.'},
+    content:{risk:'high',desc:'Backrooms-inspired liminal horror. Intense psychological dread, disturbing environments, and unsettling monster encounters. Rated 13+.'},
+    stranger:{risk:'medium',desc:'Small cooperative group format limits exposure.'},
+    actions:['Rated 13+ — the psychological horror is intense even for adults.','Not recommended for anxious children or those with sleep issues.','Preview Chapter 1 yourself before allowing play.','Consider playing alongside your child for the first session.']
+  },
+
+  // 61. FUNKY FRIDAY
+  'funky friday': {
+    name:'Funky Friday 🎵', meta:'3B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Rhythm game format. Chat is secondary to gameplay. Mostly positive community.'},
+    data:{risk:'low',desc:'Standard Roblox data only.'},
+    spend:{risk:'low',desc:'Some cosmetic options. Low monetization pressure.'},
+    links:{risk:'low',desc:'No external links detected inside the experience.'},
+    content:{risk:'low',desc:'Friday Night Funkin\'-inspired rhythm game. Music and timing-based. Family-appropriate.'},
+    stranger:{risk:'low',desc:'Competitive but brief matches minimize harmful stranger contact.'},
+    actions:['Safe and fun rhythm game for all ages.','Parents: some music tracks reference popular internet memes — preview the song list if concerned.']
+  },
+
+  // 62. LUMBER TYCOON 2
+  'lumber tycoon 2': {
+    name:'Lumber Tycoon 2 🌲', meta:'1B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Cooperative resource gathering. Calm and focused community.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. One of Roblox\'s least monetized classics.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Logging and resource management simulation. Entirely wholesome.'},
+    stranger:{risk:'low',desc:'Cooperative sandbox with low stranger risk.'},
+    actions:['A classic Roblox experience — very safe for all ages.','Great for kids who enjoy creative building and resource management.']
+  },
+
+  // 63. CAR CRUSHERS 2
+  'car crushers 2': {
+    name:'Car Crushers 2 🚗', meta:'1.5B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Destruction sandbox. Gameplay-focused with minimal social pressure.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Vehicle upgrades and VIP passes available via Robux.'},
+    links:{risk:'low',desc:'No external links detected.'},
+    content:{risk:'low',desc:'Vehicle destruction sandbox. Cartoony and completely age-appropriate.'},
+    stranger:{risk:'low',desc:'Focused sandbox gameplay minimizes stranger interaction.'},
+    actions:['Safe and entertaining for all ages.','Set a small Robux budget for vehicle unlocks if desired.']
+  },
+
+  // 64. RESTAURANT TYCOON 2
+  'restaurant tycoon 2': {
+    name:'Restaurant Tycoon 2 🍽️', meta:'500M visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Social simulation with minimal harmful chat. Generally wholesome community.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Low spending pressure.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Restaurant management simulation. Positive and constructive gameplay.'},
+    stranger:{risk:'low',desc:'Social but low-risk environment.'},
+    actions:['Excellent choice for younger children — very safe overall.','Encourages creativity and basic business thinking.']
+  },
+
+  // 65. CREATURES OF SONARIA
+  'creatures of sonaria': {
+    name:'Creatures of Sonaria 🦕', meta:'1.5B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Creature RPG community with active trading. Some conflict during PvP hunts.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Creature gacha system and Robux mutations create significant ongoing spending pressure.'},
+    links:{risk:'medium',desc:'Active Discord for creature trading linked externally.'},
+    content:{risk:'low',desc:'Creature survival exploration. Fantasy animals. Age-appropriate for 9+.'},
+    stranger:{risk:'medium',desc:'Open world increases stranger contact during exploration.'},
+    actions:['Set a strict Robux limit — creature gacha is one of the primary risks.','Block external Discord links.','Safe content-wise — main risk is spending, not social exposure.']
+  },
+
+  // 66. RO-GHOUL
+  'ro-ghoul': {
+    name:'Ro-Ghoul 🩸', meta:'2B visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'high',desc:'Open chat in a dark, combat-focused community. Mature language common.'},
+    data:{risk:'medium',desc:'Session and behavioral data tracked. Some third-party analytics noted.'},
+    spend:{risk:'high',desc:'Kagune upgrades and RC boosts require ongoing Robux investment.'},
+    links:{risk:'high',desc:'Large Discord community actively linked inside game for clan recruitment.'},
+    content:{risk:'high',desc:'Tokyo Ghoul-inspired dark RPG. Blood, organ-eating themes, and gore-adjacent content. Officially 13+.'},
+    stranger:{risk:'high',desc:'Open world with clan PvP. High stranger exposure from large servers.'},
+    actions:['Rated 13+ — blood and organ-eating themes are not appropriate for younger children.','Block external Discord links to prevent clan recruitment exposure.','Set a strict Robux limit for upgrade purchases.','Enable Account Restrictions to limit chat if allowed to play.']
+  },
+
+  // 67. COUNTER BLOX
+  'counter blox': {
+    name:'Counter Blox 🎯', meta:'1B visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'high',desc:'CS:GO-style competitive FPS. Voice-chat culture with frequent profanity and toxicity.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Weapon skins and cases available. Moderate spending pressure.'},
+    links:{risk:'high',desc:'Active Discord community linked for team finding and competitive play.'},
+    content:{risk:'high',desc:'Realistic Counter-Strike inspired FPS. Detailed shooting mechanics, bomb defusal, hostage themes.'},
+    stranger:{risk:'high',desc:'Competitive matchmaking with unknown players. High exposure during team-based rounds.'},
+    actions:['Rated 13+ — the most CS:GO-like experience on Roblox. Not for under-12.','Restrict chat to friends only immediately.','Block external Discord links.','Monitor for desensitization to tactical gun violence.']
+  },
+
+  // 68. CAMPING
+  'camping': {
+    name:'Camping ⛺', meta:'600M visits · Ages 9+ · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Story-driven cooperative game. Chat is focused and brief.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'medium',desc:'Campy horror-story survival. Mild suspense and jump scares. Appropriate for 9+.'},
+    stranger:{risk:'low',desc:'Small cooperative group format. Low harmful stranger exposure.'},
+    actions:['Safe and fun for ages 9+ who enjoy mild story horror.','Preview the mild horror content with younger or sensitive children first.']
+  },
+
+  // 69. ISLANDS
+  'islands': {
+    name:'Islands 🏝️', meta:'1B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Cooperative sandbox. Calm community focused on building and trading.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Classic free Roblox sandbox.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Resource collection and island building. Wholesome and creative.'},
+    stranger:{risk:'low',desc:'Cooperative sandbox with low stranger risk.'},
+    actions:['Excellent low-risk pick for all ages.','Great for kids who enjoy Minecraft-style resource and building gameplay.']
+  },
+
+  // 70. MINING SIMULATOR 2
+  'mining simulator 2': {
+    name:'Mining Simulator 2 ⛏️', meta:'2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Idle mining loop. Minimal social interaction or chat pressure.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Premium pickaxes and pets available via Robux. Moderate collecting loop.'},
+    links:{risk:'low',desc:'No significant external links.'},
+    content:{risk:'low',desc:'Mining exploration and gem collecting. Calm and age-appropriate.'},
+    stranger:{risk:'low',desc:'Solo-focused gameplay minimizes stranger interaction.'},
+    actions:['Safe for all ages.','Set a small Robux budget for pickaxe upgrades if desired.']
+  },
+
+  // 71. THE WILD WEST
+  'the wild west': {
+    name:'The Wild West 🤠', meta:'1B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Open-world game with PvP bandit/sheriff roles. Moderate chat exposure.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Horse upgrades, weapon skins and ranch passes available via Robux.'},
+    links:{risk:'low',desc:'No significant external links.'},
+    content:{risk:'medium',desc:'Western open world with shooting, robbery and bounty mechanics. Cartoon-style violence.'},
+    stranger:{risk:'medium',desc:'Open-world PvP increases stranger exposure, particularly in bandit raids.'},
+    actions:['Preview the Western crime and shooting themes with younger children.','Restrict chat during PvP play sessions.','Safe for ages 9+ with some parental guidance on the PvP mechanics.']
+  },
+
+  // 72. ROBLOX HIGH SCHOOL 2
+  'roblox high school 2': {
+    name:'Roblox High School 2 🏫', meta:'1.5B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'high',desc:'Heavy social roleplay with open chat. Clique and social drama dynamics common.'},
+    data:{risk:'medium',desc:'Social graph and behavioral data collected across large shared servers.'},
+    spend:{risk:'medium',desc:'Outfit upgrades and cosmetics available via Robux.'},
+    links:{risk:'low',desc:'No significant external links.'},
+    content:{risk:'low',desc:'High school life simulator. Generally family-friendly content.'},
+    stranger:{risk:'high',desc:'Large social servers built entirely around stranger interaction. High exposure.'},
+    actions:['Enable Account Restrictions to limit who can message your child in-game.','Social roleplay environments carry higher grooming risk — monitor friend requests.','Review chat logs periodically via the Roblox parent dashboard.','Discuss online social dynamics and peer pressure before play.']
+  },
+
+  // 73. SURVIVE THE DISASTERS 2
+  'survive the disasters 2': {
+    name:'Survive the Disasters 2 🌊', meta:'2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Fast-paced round format. Minimal harmful chat interaction.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Some cosmetics available. Very low spending pressure.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Survival minigame with various cartoon disaster events. Entirely age-appropriate.'},
+    stranger:{risk:'low',desc:'Short rounds minimize prolonged stranger contact.'},
+    actions:['A classic safe Roblox experience. Great for all ages.','One of the platform\'s most wholesome competitive games.']
+  },
+
+  // 74. PLANE CRAZY
+  'plane crazy': {
+    name:'Plane Crazy ✈️', meta:'500M visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Building sandbox. Community focused on sharing builds and testing physics.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Classic free sandbox.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Aircraft and vehicle building sandbox. Creative and STEM-oriented.'},
+    stranger:{risk:'low',desc:'Focused building gameplay. Low stranger risk.'},
+    actions:['Excellent creative pick for all ages — encourages STEM thinking.','One of Roblox\'s safest and most educational sandbox experiences.']
+  },
+
+  // 75. EPIC MINIGAMES
+  'epic minigames': {
+    name:'Epic Minigames 🎮', meta:'2.5B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Short random minigames. Chat is casual and brief between rounds.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Some cosmetic options. Low spending pressure.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Variety minigame hub. Diverse and entirely family-friendly activities.'},
+    stranger:{risk:'low',desc:'Short round format minimizes sustained stranger contact.'},
+    actions:['Safe and fun for all ages — great intro game for new Roblox players.','One of the most family-friendly hubs on the platform.']
+  },
+
+  // 76. SKY WARS
+  'sky wars': {
+    name:'Sky Wars ☁️', meta:'1B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Battle royale-style PvP with short rounds. Chat is minimal.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Some cosmetics available. Very low monetization.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Island survival PvP. Cartoony and age-appropriate. No graphic content.'},
+    stranger:{risk:'low',desc:'Short matches limit harmful stranger contact.'},
+    actions:['Safe competitive game for all ages.','A good introduction to PvP gameplay for younger children.']
+  },
+
+  // 77. TYPE SOUL
+  'type soul': {
+    name:'Type Soul ⚡', meta:'2.5B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Open-world faction PvP. Clan chat can be competitive and aggressive.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Schrift/race rerolls and boost passes drive significant ongoing Robux spending.'},
+    links:{risk:'high',desc:'Very active Discord community linked for clan recruitment and reroll codes.'},
+    content:{risk:'low',desc:'Bleach-inspired soul society RPG. Anime combat. Age-appropriate themes.'},
+    stranger:{risk:'medium',desc:'Faction PvP world increases stranger interaction during clan wars.'},
+    actions:['Set a strict Robux limit — race rerolls are extremely addictive.','Block external Discord links.','Review Account Restrictions to manage chat in PvP zones.']
+  },
+
+  // 78. WISTERIA 2
+  'wisteria 2': {
+    name:'Wisteria 2 🌸', meta:'800M visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Open RPG world. Breathing style community can be competitive.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Breathing rerolls, clan slots and boost passes create ongoing spending pressure.'},
+    links:{risk:'high',desc:'Active Discord community for breathing style codes linked externally.'},
+    content:{risk:'low',desc:'Demon Slayer-inspired RPG. Anime swordplay. Age-appropriate.'},
+    stranger:{risk:'medium',desc:'Open world with demon/slayer faction conflicts increases stranger exposure.'},
+    actions:['Set a strict Robux limit — breathing rerolls are the primary spending risk.','Block external Discord links.','Safe content overall — main risks are spending and chat.']
+  },
+
+  // 79. BIG PAINTBALL
+  'big paintball': {
+    name:'BIG Paintball! 🎨', meta:'1B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'medium',desc:'Competitive shooter. Some trash-talk but matches are short and casual.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Some cosmetic weapon skins available. Low spending pressure.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Colorful paintball shooter. Completely cartoonish and age-appropriate.'},
+    stranger:{risk:'low',desc:'Fast match format minimizes harmful stranger contact.'},
+    actions:['Safe competitive shooter for all ages.','Discuss good sportsmanship and competitive attitudes before play.']
+  },
+
+  // 80. CRIMINALITY
+  'criminality': {
+    name:'Criminality 🔫', meta:'800M visits · Ages 13+ · Checked just now',
+    overall:'high', badge:'🔴', label:'High Risk', badgeClass:'badge-high',
+    chat:{risk:'high',desc:'Crime-focused open world with unmoderated chat. Mature language and themes throughout.'},
+    data:{risk:'medium',desc:'Behavioral data tracked. Session analytics noted.'},
+    spend:{risk:'medium',desc:'Weapon upgrades and cosmetics available via Robux.'},
+    links:{risk:'high',desc:'Active Discord and social community linked externally.'},
+    content:{risk:'high',desc:'GTA-inspired crime simulator. Shooting, robbery, drug references, and gang culture. Rated 13+.'},
+    stranger:{risk:'high',desc:'Large open-world servers with mixed ages. High stranger exposure.'},
+    actions:['Rated 13+ — GTA-style crime content is not appropriate for children under 12.','Block immediately via Roblox content maturity filters if your child is under 13.','Restrict chat to friends only if allowed to play.','Have a direct conversation about the criminal themes depicted.']
+  },
+
+  // 81. SPEED RUN 4
+  'speed run 4': {
+    name:'Speed Run 4 🏃', meta:'1B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Minimal chat. Speed-focused solo gameplay keeps interaction brief.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Classic free Roblox experience.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Classic platformer with neon obstacle courses. Colorful and age-appropriate.'},
+    stranger:{risk:'low',desc:'Solo-focused speed running minimizes stranger contact.'},
+    actions:['A classic safe Roblox experience for all ages.','Be aware of frustration from difficult sections — check in on emotional wellbeing.']
+  },
+
+  // 82. MEGA FUN OBBY
+  'mega fun obby': {
+    name:'Mega Fun Obby 🏃', meta:'700M visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Minimal social interaction. Solo obstacle course gameplay.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Very low spending pressure.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'2000+ stage obstacle course. Colorful and entirely family-appropriate.'},
+    stranger:{risk:'low',desc:'Solo gameplay loop. Very low stranger risk.'},
+    actions:['One of the original safe Roblox experiences. Great for all ages.','Excellent first game for new Roblox players.']
+  },
+
+  // 83. KAIJU UNIVERSE
+  'kaiju universe': {
+    name:'Kaiju Universe 🦖', meta:'500M visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Monster battle sandbox. Gameplay-focused with minimal social pressure.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'G-Cells (premium currency) used to upgrade and unlock kaiju. Moderate spending loop.'},
+    links:{risk:'low',desc:'No significant external links inside the experience.'},
+    content:{risk:'low',desc:'Giant monster battles inspired by Godzilla. Cartoony and family-friendly.'},
+    stranger:{risk:'low',desc:'Battle sandbox with limited social interaction.'},
+    actions:['Safe for all ages.','Set a small budget for G-Cell upgrades if your child wants premium kaiju.']
+  },
+
+  // 84. SUPER BOMB SURVIVAL
+  'super bomb survival': {
+    name:'Super Bomb Survival 💣', meta:'1.5B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Fast-paced survival rounds. Minimal open social interaction.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Some cosmetics available. Very low spending pressure.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Cartoon bomb-dodging party game. Entirely age-appropriate.'},
+    stranger:{risk:'low',desc:'Short rounds minimize prolonged stranger contact.'},
+    actions:['Safe and fun for all ages — great party game pick.','No significant concerns.']
+  },
+
+  // 85. FISHING SIMULATOR
+  'fishing simulator': {
+    name:'Fishing Simulator 🎣', meta:'1B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Calm idle fishing environment. Very minimal social interaction.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Premium rods and bait purchasable. Moderate collecting loop.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Peaceful fishing simulation. Completely family-friendly.'},
+    stranger:{risk:'low',desc:'Solo-oriented gameplay. Very low stranger risk.'},
+    actions:['Safe for all ages.','Set a small Robux budget for rod upgrades if desired.']
+  },
+
+  // 86. WORLD // ZERO
+  'world // zero': {
+    name:'World // Zero ⚔️', meta:'500M visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'low',desc:'Dungeon-focused RPG with minimal harmful chat interaction.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Class unlocks, rebirth passes, and gear create significant ongoing Robux spending.'},
+    links:{risk:'medium',desc:'Active Discord server linked for guild coordination.'},
+    content:{risk:'low',desc:'Fantasy dungeon RPG with co-op combat. Age-appropriate anime aesthetic.'},
+    stranger:{risk:'low',desc:'Cooperative dungeon format with low harmful stranger exposure.'},
+    actions:['Set a strict Robux limit — class unlocks and rebirths create ongoing costs.','Block external Discord links for unsupervised guild access.','Safe content-wise — spending is the primary risk.']
+  },
+
+  // 87. LEGENDS OF SPEED
+  'legends of speed': {
+    name:'Legends of Speed ⚡', meta:'2B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Speed simulator with minimal social pressure.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Speed boosts and premium pets available via Robux.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Speed racing simulator. Colorful and entirely age-appropriate.'},
+    stranger:{risk:'low',desc:'Competitive but low-risk environment.'},
+    actions:['Safe for all ages.','Set a small budget for speed boost upgrades.']
+  },
+
+  // 88. ANIME BATTLE ARENA
+  'anime battle arena': {
+    name:'Anime Battle Arena ⚔️', meta:'600M visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Competitive PvP arena. Toxic behavior common in high-stakes ranked matches.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Character passes and cosmetics available. Moderate spending pressure.'},
+    links:{risk:'medium',desc:'Active Discord for character meta and tournament play linked externally.'},
+    content:{risk:'low',desc:'Anime crossover fighter. Cartoon action combat. Age-appropriate.'},
+    stranger:{risk:'medium',desc:'Competitive matchmaking pairs your child with unknown players.'},
+    actions:['Discuss PvP sportsmanship expectations before play.','Block external Discord links.','Moderate risk — safe for ages 9+ with chat restrictions enabled.']
+  },
+
+  // 89. CLICKER SIMULATOR
+  'clicker simulator': {
+    name:'Clicker Simulator 🖱️', meta:'1.5B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Idle clicker game with minimal social interaction.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Premium pets and click multipliers purchasable via Robux.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Idle clicking progression game. Completely harmless content.'},
+    stranger:{risk:'low',desc:'Solo gameplay loop. Very low stranger risk.'},
+    actions:['Safe for all ages.','Be aware of the compulsive click loop — set session time limits.','Set a Robux budget for pet upgrades if desired.']
+  },
+
+  // 90. ZOMBIE ATTACK
+  'zombie attack': {
+    name:'Zombie Attack 🧟', meta:'1B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Wave-defense format. Team coordination chat only.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'medium',desc:'Cartoon zombie defense. Mild horror elements but entirely cartoonish. Fine for 9+.'},
+    stranger:{risk:'low',desc:'Small cooperative team format. Low harmful stranger exposure.'},
+    actions:['Safe wave-defense game for ages 9+.','Cartoon zombies are not graphic — minimal concern for most families.']
+  },
+
+  // 91. ANIME CROSSOVER DEFENSE
+  'anime crossover defense': {
+    name:'Anime Crossover Defense 🗡️', meta:'1B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'low',desc:'Tower defense format. Very little open social chat.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Banner summon system (gacha) drives significant Robux spending for units.'},
+    links:{risk:'medium',desc:'Discord community for summon guides and trading linked externally.'},
+    content:{risk:'low',desc:'Anime crossover tower defense. Age-appropriate themes.'},
+    stranger:{risk:'low',desc:'Cooperative format with low harmful stranger exposure.'},
+    actions:['Set a strict Robux limit — the gacha summon system is the primary risk.','Explain gacha probability mechanics to your child clearly.','Block external Discord links.']
+  },
+
+  // 92. ROBLOXIAN LIFE
+  'robloxian life': {
+    name:'Robloxian Life 🏙️', meta:'1B visits · All Ages · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'high',desc:'Heavy social roleplay built around stranger interaction. Open chat with large servers.'},
+    data:{risk:'medium',desc:'Social behavior data collected across large shared servers.'},
+    spend:{risk:'medium',desc:'Home upgrades and cosmetics available via Robux.'},
+    links:{risk:'low',desc:'No significant external links.'},
+    content:{risk:'low',desc:'Life simulation roleplay. Generally family-friendly content.'},
+    stranger:{risk:'high',desc:'Social roleplay environment with constant stranger interaction by design.'},
+    actions:['Enable Account Restrictions to limit who can message your child in-game.','Monitor new friend requests made during roleplay sessions.','Social RP environments carry elevated grooming risk — review chat logs periodically.','Discuss online social boundaries before play.']
+  },
+
+  // 93. TOWER HEROES
+  'tower heroes': {
+    name:'Tower Heroes 🏰', meta:'500M visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Cooperative tower defense. Focused team play with minimal social pressure.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization. Low spending pressure.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Colorful hero tower defense. Entirely family-friendly.'},
+    stranger:{risk:'low',desc:'Small cooperative team format. Low stranger risk.'},
+    actions:['Excellent safe pick for all ages.','Great for kids who enjoy strategy and teamwork games.']
+  },
+
+  // 94. DRAGON BALL ULTIMATE
+  'dragon ball ultimate': {
+    name:'Dragon Ball Ultimate 🐉', meta:'1.5B visits · Ages 9+ · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'Competitive PvP community. Toxic behavior in power-level-based rankings.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'high',desc:'Race rerolls, zeni packs and boost passes drive significant Robux spending.'},
+    links:{risk:'high',desc:'Active Discord for tournament and PvP meta heavily linked externally.'},
+    content:{risk:'low',desc:'Dragon Ball Z-inspired RPG. Anime combat. Age-appropriate themes.'},
+    stranger:{risk:'medium',desc:'Open world PvP increases stranger contact significantly.'},
+    actions:['Set a strict Robux limit — race rerolls and boosts are ongoing costs.','Block external Discord links.','Review Account Restrictions to manage chat in PvP zones.']
+  },
+
+  // 95. SURVIVE THE NIGHT
+  'survive the night': {
+    name:'Survive the Night 🌙', meta:'600M visits · Ages 9+ · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Cooperative horror survival. Team-focused coordination chat only.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'medium',desc:'Night-based monster survival. Dark atmosphere with mild jump scares. Fine for ages 9+.'},
+    stranger:{risk:'low',desc:'Small cooperative team format. Low harmful stranger exposure.'},
+    actions:['Preview the dark atmosphere with sensitive younger children.','Safe overall for ages 9+ who enjoy mild cooperative horror survival.']
+  },
+
+  // 96. PET RANCH SIMULATOR 2
+  'pet ranch simulator 2': {
+    name:'Pet Ranch Simulator 2 🐄', meta:'500M visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Idle ranch simulator. Minimal social interaction or chat pressure.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Premium pets and ranch upgrades available via Robux. Moderate collecting loop.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Farm and pet management simulation. Wholesome and family-appropriate.'},
+    stranger:{risk:'low',desc:'Solo-focused gameplay. Very low stranger risk.'},
+    actions:['Safe for all ages.','Set a small Robux budget for pet upgrades if desired.']
+  },
+
+  // 97. OBBY CREATOR
+  'obby creator': {
+    name:'Obby Creator 🏗️', meta:'2B visits · All Ages · Checked just now',
+    overall:'medium', badge:'⚠️', label:'Medium Risk', badgeClass:'badge-medium',
+    chat:{risk:'medium',desc:'User-generated content platform with open social areas. Content quality varies.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'medium',desc:'User-created obstacle courses. Content varies by creator — occasional inappropriate titles or themes in community obbies.'},
+    stranger:{risk:'medium',desc:'Community browsing exposes children to user-generated content from strangers.'},
+    actions:['Review which community obbies your child is playing — quality varies significantly.','Enable Account Restrictions to limit who can interact with your child.','Safe overall, but monitor user-generated content more closely than curated games.']
+  },
+
+  // 98. ARMY CONTROL SIMULATOR
+  'army control simulator': {
+    name:'Army Control Simulator 🎖️', meta:'500M visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Idle military simulator. Minimal social interaction.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Troop upgrades and base expansions available via Robux.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Cartoony army management simulation. Age-appropriate.'},
+    stranger:{risk:'low',desc:'Solo gameplay loop. Very low stranger risk.'},
+    actions:['Safe for all ages.','Set a small Robux budget for army upgrades if desired.']
+  },
+
+  // 99. RAGDOLL UNIVERSE
+  'ragdoll universe': {
+    name:'Ragdoll Universe 😵', meta:'1B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Physics sandbox with minimal social pressure.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'low',desc:'Minimal monetization.'},
+    links:{risk:'low',desc:'No external links.'},
+    content:{risk:'low',desc:'Ragdoll physics comedy sandbox. Entirely cartoonish and family-friendly.'},
+    stranger:{risk:'low',desc:'Sandbox gameplay with low stranger interaction.'},
+    actions:['Safe and silly for all ages.','No significant concerns — one of Roblox\'s lightest experiences.']
+  },
+
+  // 100. DRAGON ADVENTURES
+  'dragon adventures': {
+    name:'Dragon Adventures 🐲', meta:'1.5B visits · All Ages · Checked just now',
+    overall:'low', badge:'✅', label:'Low Risk', badgeClass:'badge-low',
+    chat:{risk:'low',desc:'Creature collecting with a friendly, cooperative community.'},
+    data:{risk:'low',desc:'Standard Roblox data.'},
+    spend:{risk:'medium',desc:'Dragon eggs, nesting materials and cosmetics available via Robux.'},
+    links:{risk:'low',desc:'No significant external links inside the experience.'},
+    content:{risk:'low',desc:'Fantasy dragon breeding and exploration. Wholesome and family-friendly.'},
+    stranger:{risk:'low',desc:'Cooperative and calm environment. Low stranger risk.'},
+    actions:['Safe for all ages — great for kids who love fantasy creature collecting.','Set a small Robux budget for egg hatching and dragon customization.']
+  },
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -2077,6 +2727,56 @@ const allGames = [
   { key:'blue lock rivals',            label:'Blue Lock: Rivals ⚽',             visits:'1.5B visits', risk:'low'    },
   { key:'anime adventures',            label:'Anime Adventures ⚔️',              visits:'1.5B visits', risk:'medium' },
   { key:'99 nights in the forest',     label:'99 Nights in the Forest 🌲',      visits:'1B visits',   risk:'low'    },
+  { key:'fisch',                        label:'Fisch 🎣',                          visits:'3B visits',   risk:'low'    },
+  { key:'pet simulator 99',             label:'Pet Simulator 99 🐾',               visits:'7.5B visits', risk:'medium' },
+  { key:"sol's rng",                    label:"Sol's RNG 🎲",                       visits:'2B visits',   risk:'low'    },
+  { key:'project slayers',              label:'Project Slayers ⚔️',               visits:'3.5B visits', risk:'medium' },
+  { key:'grand piece online',           label:'Grand Piece Online 🏴‍☠️',          visits:'2B visits',   risk:'medium' },
+  { key:'your bizarre adventure',       label:'Your Bizarre Adventure 🌀',         visits:'1.5B visits', risk:'medium' },
+  { key:'a universal time',             label:'A Universal Time ⌚',               visits:'1B visits',   risk:'medium' },
+  { key:'peroxide',                     label:'Peroxide ⚡',                        visits:'1.5B visits', risk:'medium' },
+  { key:'the mimic',                    label:'The Mimic 👹',                       visits:'1B visits',   risk:'high'   },
+  { key:'apeirophobia',                 label:'Apeirophobia 😨',                    visits:'800M visits', risk:'high'   },
+  { key:'funky friday',                 label:'Funky Friday 🎵',                   visits:'3B visits',   risk:'low'    },
+  { key:'lumber tycoon 2',              label:'Lumber Tycoon 2 🌲',                visits:'1B visits',   risk:'low'    },
+  { key:'car crushers 2',               label:'Car Crushers 2 🚗',                 visits:'1.5B visits', risk:'low'    },
+  { key:'restaurant tycoon 2',          label:'Restaurant Tycoon 2 🍽️',           visits:'500M visits', risk:'low'    },
+  { key:'creatures of sonaria',         label:'Creatures of Sonaria 🦕',           visits:'1.5B visits', risk:'medium' },
+  { key:'ro-ghoul',                     label:'Ro-Ghoul 🩸',                        visits:'2B visits',   risk:'high'   },
+  { key:'counter blox',                 label:'Counter Blox 🎯',                   visits:'1B visits',   risk:'high'   },
+  { key:'camping',                      label:'Camping ⛺',                         visits:'600M visits', risk:'low'    },
+  { key:'islands',                      label:'Islands 🏝️',                        visits:'1B visits',   risk:'low'    },
+  { key:'mining simulator 2',           label:'Mining Simulator 2 ⛏️',            visits:'2B visits',   risk:'low'    },
+  { key:'the wild west',                label:'The Wild West 🤠',                  visits:'1B visits',   risk:'medium' },
+  { key:'roblox high school 2',         label:'Roblox High School 2 🏫',           visits:'1.5B visits', risk:'medium' },
+  { key:'survive the disasters 2',      label:'Survive the Disasters 2 🌊',        visits:'2B visits',   risk:'low'    },
+  { key:'plane crazy',                  label:'Plane Crazy ✈️',                    visits:'500M visits', risk:'low'    },
+  { key:'epic minigames',               label:'Epic Minigames 🎮',                 visits:'2.5B visits', risk:'low'    },
+  { key:'sky wars',                     label:'Sky Wars ☁️',                       visits:'1B visits',   risk:'low'    },
+  { key:'type soul',                    label:'Type Soul ⚡',                       visits:'2.5B visits', risk:'medium' },
+  { key:'wisteria 2',                   label:'Wisteria 2 🌸',                     visits:'800M visits', risk:'medium' },
+  { key:'big paintball',                label:'BIG Paintball! 🎨',                 visits:'1B visits',   risk:'low'    },
+  { key:'criminality',                  label:'Criminality 🔫',                     visits:'800M visits', risk:'high'   },
+  { key:'speed run 4',                  label:'Speed Run 4 🏃',                     visits:'1B visits',   risk:'low'    },
+  { key:'mega fun obby',                label:'Mega Fun Obby 🏃',                   visits:'700M visits', risk:'low'    },
+  { key:'kaiju universe',               label:'Kaiju Universe 🦖',                  visits:'500M visits', risk:'low'    },
+  { key:'super bomb survival',          label:'Super Bomb Survival 💣',             visits:'1.5B visits', risk:'low'    },
+  { key:'fishing simulator',            label:'Fishing Simulator 🎣',               visits:'1B visits',   risk:'low'    },
+  { key:'world // zero',                label:'World // Zero ⚔️',                  visits:'500M visits', risk:'medium' },
+  { key:'legends of speed',             label:'Legends of Speed ⚡',                visits:'2B visits',   risk:'low'    },
+  { key:'anime battle arena',           label:'Anime Battle Arena ⚔️',             visits:'600M visits', risk:'medium' },
+  { key:'clicker simulator',            label:'Clicker Simulator 🖱️',              visits:'1.5B visits', risk:'low'    },
+  { key:'zombie attack',                label:'Zombie Attack 🧟',                   visits:'1B visits',   risk:'low'    },
+  { key:'anime crossover defense',      label:'Anime Crossover Defense 🗡️',        visits:'1B visits',   risk:'medium' },
+  { key:'robloxian life',               label:'Robloxian Life 🏙️',                 visits:'1B visits',   risk:'medium' },
+  { key:'tower heroes',                 label:'Tower Heroes 🏰',                    visits:'500M visits', risk:'low'    },
+  { key:'dragon ball ultimate',         label:'Dragon Ball Ultimate 🐉',            visits:'1.5B visits', risk:'medium' },
+  { key:'survive the night',            label:'Survive the Night 🌙',               visits:'600M visits', risk:'low'    },
+  { key:'pet ranch simulator 2',        label:'Pet Ranch Simulator 2 🐄',           visits:'500M visits', risk:'low'    },
+  { key:'obby creator',                 label:'Obby Creator 🏗️',                   visits:'2B visits',   risk:'medium' },
+  { key:'army control simulator',       label:'Army Control Simulator 🎖️',         visits:'500M visits', risk:'low'    },
+  { key:'ragdoll universe',             label:'Ragdoll Universe 😵',                visits:'1B visits',   risk:'low'    },
+  { key:'dragon adventures',            label:'Dragon Adventures 🐲',               visits:'1.5B visits', risk:'low'    },
 ];
 
 const dotColor = { low:'var(--green)', medium:'var(--amber)', high:'var(--red)' };
